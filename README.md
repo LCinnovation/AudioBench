@@ -2,6 +2,15 @@
 
 [**English**](#introduction) · [中文](#项目介绍)
 
+**Download**: [Installer](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-setup-x64.exe) (260 MiB) ·
+[Portable](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-portable-win64.zip) (433 MiB) ·
+[Checksums](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/SHA256SUMS.txt) ·
+[All releases](https://github.com/LCinnovation/AudioBench/releases) · [Changelog](CHANGELOG.md)
+
+> Both packages bundle FFmpeg and the 4-stem / 6-stem separation models, so the app works offline right after installation.
+>
+> The installers are **not code-signed**; SmartScreen will warn about an "unknown publisher" on first run. Please verify `SHA256SUMS.txt` first.
+
 **下载**：[安装版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-setup-x64.exe)（260 MiB） ·
 [绿色版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-portable-win64.zip)（433 MiB） ·
 [校验值](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/SHA256SUMS.txt) ·
@@ -11,7 +20,7 @@
 >
 > 安装包**未做代码签名**，首次运行会被 SmartScreen 提示"未知发布者"，请先核对 `SHA256SUMS.txt`。
 
-![新手引导](docs/screenshots/m4-frozen-guide.png)
+![First-run guide / 新手引导](docs/screenshots/m4-frozen-guide.png)
 
 ---
 
@@ -71,10 +80,39 @@ mp3 / wav / flac 导出 —— 界面中英双语。
 
 ---
 
-**目录**：[AI 辅助编程声明](#关于-ai-辅助编程请先读这一段) ·
-[功能一览](#功能一览) · [安装](#安装) · [使用指南](#使用指南) · [命令行](#命令行) ·
-[快捷键](#快捷键) · [技术架构](#技术架构) · [从源码构建](#从源码构建) ·
-[已知限制](#已知限制) · [感谢开源项目](#感谢开源项目) · [许可](#许可) · [欢迎批评指正](#欢迎批评指正)
+## Contents / 目录
+
+Every section below appears in English first, followed by the Chinese version of the same section.
+
+| Topic | English | 中文 |
+|---|---|---|
+| Quick start | [Quick Start](#quick-start) | [三分钟上手](#三分钟上手) |
+| AI disclosure | [AI-Assisted Development](#ai-assisted-development-read-this-first) | [关于 AI 辅助编程](#关于-ai-辅助编程请先读这一段) |
+| Features | [Feature Overview](#feature-overview) | [功能一览](#功能一览) |
+| Install | [Installation](#installation) | [安装](#安装) |
+| Usage | [User Guide](#user-guide) | [使用指南](#使用指南) |
+| CLI | [Command Line](#command-line) | [命令行](#命令行) |
+| Shortcuts | [Keyboard Shortcuts](#keyboard-shortcuts) | [快捷键](#快捷键) |
+| Internals | [Architecture](#architecture) | [技术架构](#技术架构) |
+| Build | [Building from Source](#building-from-source) | [从源码构建](#从源码构建) |
+| Limits | [Known Limitations](#known-limitations) | [已知限制](#已知限制) |
+| Credits | [Credits](#credits-open-source-projects) | [感谢开源项目](#感谢开源项目) |
+| License | [License](#license) | [许可](#许可) |
+| Feedback | [Feedback Welcome](#feedback-welcome) | [欢迎批评指正](#欢迎批评指正) |
+
+---
+
+## Quick Start
+
+```text
+1. Launch AudioBench.exe (the 5-step guide appears on first run and can be skipped)
+2. Press Ctrl+I to import a song, or drag the file onto the timeline
+3. Space to play; drag a clip edge to trim; select a clip to change speed or pitch
+4. Click "Separate" on the right of the transport bar → choose the 4-stem model → start → create tracks
+5. Ctrl+E to export mp3 / wav / flac
+```
+
+If something looks wrong, press `F1` for the help panel, or run `AudioBench.exe --selftest --out s.json` to check the environment.
 
 ---
 
@@ -89,6 +127,30 @@ mp3 / wav / flac 导出 —— 界面中英双语。
 ```
 
 遇到问题先按 `F1` 看帮助面板，或跑 `AudioBench.exe --selftest --out s.json` 看环境是否正常。
+
+---
+
+## AI-Assisted Development (Read This First)
+
+**This project was built with AI assistance.** Requirements breakdown, architecture, code, debugging,
+test cases and documentation were produced in multi-turn collaboration with an AI coding agent
+(WorkBuddy, running DeepSeek-series models); the human set the requirements, made the trade-off calls
+and signed off on acceptance.
+
+This is not a disclaimer — it is a calibration for your expectations:
+
+- ✅ The upside is coverage: a dozen modules, over a hundred test cases, a full Chinese/English UI and
+  the packaging scripts were all reviewed repeatedly by a human (and an AI);
+- ⚠️ The risk is that **details may be shaky**: before delivery this project really did hit
+  "works from source, breaks when frozen" bugs (the separation runtime left out of the bundle, a
+  missing method on the NCM dialog, GBK stdout mangling Chinese paths into `????` in the frozen build).
+  Each of those now has a regression test, but that does not mean none are left;
+- 🙏 So: **if you find a bug, please open an Issue** with the JSON from
+  `AudioBench.exe --selftest --out s.json` and the log tail
+  (`%APPDATA%\AudioBench\logs\AudioBench.log`); that resolves the vast majority of reports quickly.
+
+If you plan to use it in production or ship it commercially, run your own full test and compliance
+review (see [License](#license)).
 
 ---
 
@@ -111,12 +173,32 @@ mp3 / wav / flac 导出 —— 界面中英双语。
 
 ---
 
+## Feature Overview
+
+| Module | Capability | Status |
+|---|---|---|
+| Import | wav / mp3 / flac / ogg / m4a / aac / wma, drag-and-drop or `Ctrl+I`, automatic decoding + waveform peak cache | ✅ |
+| Multi-track | Track header (colour band / index / icon / name / M / S / fader / pan / low shelf / high shelf / fade in-out / collapse), mixer | ✅ |
+| Transport | Play / stop / return to start / locate / A-B loop / metronome / master fader / level meters | ✅ |
+| Non-destructive editing | Move, edge trim, `S` split, `Del` delete, `Ctrl+D` duplicate, clip fades (linear / exponential) | ✅ |
+| Time-stretch & pitch-shift | 50–200% tempo without pitch change; ±12 semitones without tempo change (Signalsmith Stretch, real time) | ✅ |
+| Undo | Snapshot-based, 200 levels, same-kind edits coalesced within 800 ms | ✅ |
+| Stem separation | 4 stems (drums/bass/other/vocals, high quality) or 6 stems (+guitar/piano); progress / remaining time / cancel / one-click track creation | ✅ |
+| NCM conversion | Local ncm → mp3 320/192/128, flac or keep original; writes tags and cover art; CSV failure list | ✅ |
+| Export | mp3 320/192/128, wav 16/24-bit, flac; full mix or a single track; naming templates; true-peak and clipping warnings | ✅ |
+| Projects | Save / save as / recent projects / 30-second autosave / crash recovery | ✅ |
+| Markers & grid | `M` adds a marker; green flags on the ruler jump on click, right-click to rename or delete; BPM-based 4/4 bar grid | ✅ |
+| Guidance & help | 5-step first-run overlay, `F1` help panel (four walkthroughs + shortcut table + replay guide) | ✅ |
+| Bilingual | 217 strings, Chinese / English | ✅ |
+
+---
+
 ## 功能一览
 
 | 模块 | 能力 | 状态 |
 |---|---|---|
 | 导入 | wav / mp3 / flac / ogg / m4a / aac / wma，拖拽或 `Ctrl+I`，自动解码 + 波形峰值缓存 | ✅ |
-| 多轨编排 | 轨道头 11 个元素（颜色条 / 序号 / 图标 / 名称 / M / S / 推子 / 声像 / 低架 / 高架 / 渐入渐出 / 折叠）、混音器 | ✅ |
+| 多轨编排 | 轨道头（颜色条 / 序号 / 图标 / 名称 / M / S / 推子 / 声像 / 低架 / 高架 / 渐入渐出 / 折叠）、混音器 | ✅ |
 | 走带 | 播放 / 停止 / 回起点 / 定位 / A-B 循环 / 节拍器 / 主推子 / 电平表 | ✅ |
 | 非破坏编辑 | 拖移、边缘裁剪、`S` 分割、`Del` 删除、`Ctrl+D` 复制、片段淡入淡出（线性/指数） | ✅ |
 | 变速变调 | 50–200% 变速不变调；±12 半音变调不变速（Signalsmith Stretch 实时） | ✅ |
@@ -128,6 +210,44 @@ mp3 / wav / flac 导出 —— 界面中英双语。
 | 标记与网格 | `M` 加标记、标尺绿旗点击跳转、右键改名删除；按 BPM 的 4/4 小节网格 | ✅ |
 | 引导与帮助 | 首启 5 步浮层、`F1` 帮助面板（四段实操 + 快捷键表 + 重播引导） | ✅ |
 | 双语 | 中文 / English 全量 217 条字符串 | ✅ |
+
+---
+
+## Installation
+
+### Option 1: Installer (recommended)
+
+1. Download `AudioBench-0.5.1-setup-x64.exe` from [Releases](https://github.com/LCinnovation/AudioBench/releases);
+2. Double-click to install — the default target is `%LOCALAPPDATA%\Programs\AudioBench`
+   (**no administrator rights needed**; the wizard also offers a per-machine install);
+3. Launch **AudioBench** from the Start menu.
+
+The uninstaller asks whether to keep projects and settings; a silent uninstall keeps them by default.
+
+### Option 2: Portable
+
+1. Download `AudioBench-0.5.1-portable-win64.zip` from [Releases](https://github.com/LCinnovation/AudioBench/releases)
+   and extract it to any writable folder (a USB stick works);
+2. Double-click `AudioBench.exe`.
+
+With `portable.flag` present the app runs in **portable mode**: settings, logs and caches all go to
+`userdata\` next to the executable, nothing touches `%APPDATA%` and nothing is written to the registry
+(verified by script). Delete that file to get installed-mode behaviour.
+
+> If the folder is not writable, the app falls back to `%TEMP%\AudioBench-<pid>` and says so in the title bar.
+
+### Option 3: Run from source
+
+```powershell
+git clone https://github.com/LCinnovation/AudioBench.git
+cd AudioBench
+py -3.11 -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
+pwsh -File scripts\fetch-deps.ps1        # download models + FFmpeg (~800 MB)
+.venv\Scripts\python.exe -m ab           # launch
+```
+
+To build installers, see [Building from Source](#building-from-source).
 
 ---
 
@@ -164,6 +284,134 @@ pwsh -File scripts\fetch-deps.ps1        # 下载模型 + FFmpeg（约 800MB）
 ```
 
 构建安装包见 [从源码构建](#从源码构建)。
+
+---
+
+## User Guide
+
+The window runs top to bottom: **menu bar → transport bar → clip inspector → timeline (track headers on the left) → mixer → status bar**.
+
+### 1. Importing audio
+
+- **Drag files onto the timeline**, or press `Ctrl+I` to pick files;
+- Supported: `wav / mp3 / flac / ogg / m4a / aac / wma`;
+- One file = one track; imports are decoded to 44.1k/48k float and a waveform peak cache is written, so the second open is fast;
+- Double-click a track name to rename it (long names are shown from the start, the full name is in the tooltip).
+
+Failures (corrupt file, unsupported format) raise a dialog with the reason — never silently.
+
+### 2. Playback, looping, metronome
+
+| Action | How |
+|---|---|
+| Play / stop | `Space` or the transport buttons |
+| Back to start | `Home` |
+| Locate | Click the ruler or empty timeline space; click the timecode to type a position |
+| A-B loop | **Shift + drag** on the ruler; double-click the ruler to clear it |
+| Metronome | The metronome button on the right of the transport bar |
+
+Playback is driven by the device callback, so a stalling UI cannot affect the sound (the audio thread never enters Python).
+
+### 3. Editing clips
+
+| Action | How |
+|---|---|
+| Move | Drag the middle of a clip |
+| Trim | Drag the left or right edge of a clip |
+| Fade in / out | Drag the handles on **both ends of the clip's top edge** |
+| Split | `S` (at the playhead) or the context menu |
+| Duplicate | `Ctrl+D` |
+| Delete | `Del` |
+| Undo / redo | `Ctrl+Z` / `Ctrl+Shift+Z` |
+
+With a clip selected, the **clip inspector** at the top sets speed, pitch, gain, fade-in/out lengths and
+the fade curve (linear / exponential) precisely.
+
+### 4. Time-stretch and pitch-shift
+
+Select a clip → inspector:
+
+- **Speed** 50%–200%: changes duration, **pitch stays put** (handy for slowing a part down while transcribing);
+- **Pitch** ±12 semitones: changes pitch, **tempo stays put**;
+- Click "1×" to reset to the original speed.
+
+Under the hood this is Signalsmith Stretch (MIT), previewed in real time; export renders offline with the
+same algorithm, so what you hear is what you get.
+
+### 5. Markers and the beat grid
+
+- `M`: add a marker at the playhead;
+- Green flags on the ruler are markers — **click to jump**, right-click to rename or delete;
+- `Track → Clear all markers`;
+- `View → Beat grid`: draws 4/4 bar lines from the BPM (edit the BPM on the transport bar); turn it off to go back to a seconds grid.
+
+### 6. Stem separation (the headline feature)
+
+**Where**: the "Separate" button on the right of the transport bar (bar-chart icon), or the menu.
+
+**Steps**:
+
+1. Pick the **source**: the dropdown lists the current project's tracks, or use "Choose file…" to point at an audio file directly;
+2. Pick the **model**:
+   | Model | Output | Notes |
+   |---|---|---|
+   | 4 stems · high quality (default) | drums / bass / other / vocals | stems sum ≈ original (measured residual 2.2%) |
+   | 6 stems · incl. guitar/piano | the 4 above + guitar / piano | two extra stems, but roughly 17% overall reconstruction loss |
+3. Tick the stems you need and set the thread count (default = cores − 2, max 8);
+4. Click "Start": the UI shows `chunk i/N · remaining time · memory usage`;
+5. When it finishes, click "Create tracks": tracks are created from the model output, **the source track is muted automatically**, and all stems start at the same point for easy A/B.
+
+**Performance (8 threads, 3-minute song, measured)**: about **62 seconds (0.33× real time)**, with roughly
+0.8 GB current memory. Cancelling leaves no tracks behind and no temporary files.
+
+> Separation runs in a **separate process**: if it crashes, the main window is unaffected, and cancelling kills the process.
+> Result wavs live in the cache folder (`…\cache\stems\<song>_<timestamp>\`); the project references those files.
+
+**Compliance note**: separation is intended for personal study and creative practice. The model weights come
+from Demucs (MIT), but its training set MUSDB18-HQ is non-commercial, so please do not release separated stems commercially.
+
+### 7. NCM conversion
+
+`File → Convert (NCM)…` or the convert button on the transport bar.
+
+1. Drop `.ncm` files into the panel, or click "Add files…";
+2. Choose the output folder and format (mp3 320/192/128, flac, keep original);
+3. Click "Start": each item shows its status; name clashes are avoided automatically
+   (`song.flac → song (2).flac → song (3).flac`), files are **never overwritten**;
+4. On failures, use "Export failure list (CSV)".
+
+A one-time compliance notice appears on first open: the tool only converts NCM files **you already have locally**;
+it offers no downloading, searching, or ways around a paywall.
+
+Batch conversion is also available from the command line:
+
+```powershell
+AudioBench.exe --ncm-batch a\song.ncm b\song.ncm --ncm-out D:\out --ncm-fmt flac
+```
+
+### 8. Export
+
+`Ctrl+E` or the export button on the transport bar.
+
+- **Format**: mp3 320/192/128, wav 16/24-bit, flac;
+- **Range**: full mix / currently selected track only;
+- **Naming**: template `{track}_{index}_{date}`, illegal characters replaced automatically;
+- True peak is measured before export and clipping above 0 dBFS is reported (**no automatic limiting**, to avoid altering the sound);
+- The folder opens with the file selected when the export finishes.
+
+A 3-minute, three-track project exports in about **2.6 seconds** (~70× real time).
+
+### 9. First-run guide and help
+
+- The **5-step guide** opens automatically on first launch (import → playback and looping → editing and stretching → separation → export) and can be skipped;
+- **Once skipped or completed, it no longer opens automatically**;
+- Press **F1** at any time for the help panel: four walkthroughs + the shortcut table, plus "Replay guide".
+
+### 10. Projects and autosave
+
+- `Ctrl+S` saves a `.abproj` (JSON; audio paths are stored relative to the project, so the whole folder can be moved);
+- A draft is autosaved 30 seconds after edits; after an abnormal exit the next launch offers to restore it;
+- `File → Recent projects`; closing with unsaved changes prompts you.
 
 ---
 
@@ -291,6 +539,36 @@ AudioBench.exe --ncm-batch a\song.ncm b\song.ncm --ncm-out D:\out --ncm-fmt flac
 
 ---
 
+## Command Line
+
+```powershell
+AudioBench.exe                                # launch the UI
+AudioBench.exe --open project.abproj          # open a project directly
+AudioBench.exe --lang zh_CN                   # force a language (zh_CN / en_US / auto)
+AudioBench.exe --selftest --out s.json        # environment self-test (plugin-based: paths/fonts/ffmpeg/models/runtime)
+AudioBench.exe --selftest --deep --out s.json # deep self-test (also loads models, encodes one mp3)
+AudioBench.exe --audio-probe --seconds 10 --tracks 8   # 8-track real-time stress test (xruns/CPU/latency)
+AudioBench.exe --audio-probe --stretch 1.5    # stress test with time-stretching
+AudioBench.exe --ncm-batch a.ncm b.ncm --ncm-out D:\out --ncm-fmt flac
+AudioBench.exe --capture shot.png --capture-after 2000 # screenshot (automation/troubleshooting)
+```
+
+Sample `--selftest` output (excerpt):
+
+```json
+{
+  "app": {"version": "0.5.1", "frozen": true, "mode": "install"},
+  "ffmpeg": {"path": "...", "has_libmp3lame": true},
+  "sep": {"default_model": "4s",
+          "models": {"4s": {"present": true, "size_mb": 329.1},
+                     "6s": {"present": true, "size_mb": 271.6}},
+          "runtime": {"available": true, "version": "1.31.0"}},
+  "errors": []
+}
+```
+
+---
+
 ## 命令行
 
 ```powershell
@@ -321,6 +599,27 @@ AudioBench.exe --capture shot.png --capture-after 2000 # 截图（自动化/排�
 
 ---
 
+## Keyboard Shortcuts
+
+| Key | Action |
+|---|---|
+| `Space` | Play / pause |
+| `Home` | Back to start |
+| `Ctrl+I` | Import audio |
+| `Ctrl+S` / `Ctrl+Shift+S` | Save / save as |
+| `Ctrl+Z` / `Ctrl+Shift+Z` | Undo / redo |
+| `Ctrl+E` | Export |
+| `Del` | Delete the selected clip |
+| `S` | Split at the playhead |
+| `Ctrl+D` | Duplicate the clip |
+| `Ctrl+wheel` | Zoom the timeline |
+| `Ctrl+M` | Show / hide the mixer |
+| `Shift+drag ruler` | Set an A-B loop |
+| `M` | Add a marker at the playhead |
+| `F1` | Open help |
+
+---
+
 ## 快捷键
 
 | 按键 | 动作 |
@@ -339,6 +638,45 @@ AudioBench.exe --capture shot.png --capture-after 2000 # 截图（自动化/排�
 | `Shift+拖标尺` | 设置 A-B 循环 |
 | `M` | 在播放头加标记 |
 | `F1` | 打开帮助 |
+
+---
+
+## Architecture
+
+```
+Import ──► ffmpeg decode to f32 ──► .abpk peak pyramid (mmap)
+Playback ◄── RenderPlan ◄── Mixer (clip gain/fade → EQ → track fade → pan → fader → bus)
+           │
+           ├─ Real time: WASAPI shared mode (ab_audio.dll, C, ring buffer + watermark)
+           ├─ Stretch: Signalsmith Stretch (ab_stretch.dll, C ABI)
+           ├─ Separation: onnxruntime in a separate process (`--sep-worker`), overlap-add + triangular window
+           └─ Export: the same Mixer rendered offline → f32 → ffmpeg encode
+```
+
+Design notes:
+
+- **The audio thread never enters Python**: the device callback writes into a ring buffer in C, and the Python side refills it block by block;
+- **GC is frozen during playback and the threshold is raised**, so gen2 collections cannot cause dropouts;
+- **`timeBeginPeriod(1)`** keeps `Sleep` accurate (otherwise 1 ms becomes 15.6 ms);
+- **Devices start lazily and stop when idle**: the sound card is not grabbed at launch.
+
+Layout:
+
+```
+src/ab/
+  app/     startup, state, config, paths, logging, crash handling, self-test, i18n
+  audio/   backend abstraction, WASAPI shim, DSP, mixer, engine, render plan, stretch
+  io/      ffmpeg wrapper, decode cache, peak cache, export
+  model/   project / track / clip / undo stack
+  ncm/     NCM decryption and transcoding
+  sep/     separation model registry, worker, client
+  ui/      main window, transport, track headers, timeline, mixer, inspector, theme, dialogs
+  tools/   i18n generation, font subsetting, size report
+native/     C/C++ sources and build scripts (ab_audio.dll / ab_stretch.dll)
+packaging/  PyInstaller spec, Inno Setup script, third-party notices
+tests/      pytest (81 cases)
+docs/       screenshots and model notes
+```
 
 ---
 
@@ -381,6 +719,39 @@ docs/       截图与模型说明
 
 ---
 
+## Building from Source
+
+**Requirements**: Windows 10/11 x64, Python 3.11, MSVC 2022 Build Tools (to compile the DLLs),
+Inno Setup 6 (for the installer, optional).
+
+```powershell
+# 1) Python environment
+py -3.11 -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
+
+# 2) Large dependencies (models + ffmpeg)
+pwsh -File scripts\fetch-deps.ps1
+
+# 3) Native DLLs (needs vcvars64)
+pwsh -File native\build.ps1
+
+# 4) Package (onedir + portable zip)
+pwsh -File packaging\build.ps1 -Clean
+
+# 5) Installer (needs ISCC.exe from Inno Setup 6)
+pwsh -File packaging\make_installer.ps1
+
+# Tests
+.venv\Scripts\python.exe -m pytest
+.venv\Scripts\python.exe -m ab.tools.make_i18n --check   # translation completeness
+```
+
+`native\build.ps1` looks for `C:\BuildTools\VC\Auxiliary\Build\vcvars64.bat` by default; pass
+`-VcVars` to point at a different path. Without the DLLs the app falls back to the sounddevice backend
+(still functional, but without WASAPI shared-mode low latency and watermark control).
+
+---
+
 ## 从源码构建
 
 **依赖**：Windows 10/11 x64、Python 3.11、MSVC 2022 Build Tools（编译 DLL）、
@@ -414,6 +785,23 @@ pwsh -File packaging\make_installer.ps1
 
 ---
 
+## Known Limitations
+
+1. **CrossOver / macOS has not been tested by the developer.** Every Windows-side check passes, but the
+   translation layer needs verification of its own (the app already degrades gracefully under Wine: no
+   OpenGL dependency, no `QMediaPlayer`).
+2. **Separation peak memory** is about 0.8 GB as a working set (on target), but the historical peak can
+   reach 2.8 GB (transient ORT tensors).
+3. **ffmpeg is not trimmed**; the full LGPL shared build is about 160 MB, which is why the installer is 260 MB.
+4. **No batch separation queue** — one song at a time (NCM conversion does have a queue).
+5. **Spectrum view / custom shortcuts / light theme** exist only as interfaces, not wired to a full UI.
+6. Separated stems are **not bit-exact**: summing the four stems still leaves about 2% residual against
+   the original (a property of the model), so keep the source track when you need A/B.
+7. Models and ffmpeg are not in the repo (see `scripts/fetch-deps.ps1`), so you must run that script once
+   before the first run after cloning.
+
+---
+
 ## 已知限制
 
 1. **CrossOver / macOS 未由开发者实测**。Windows 侧全部门禁通过，转译层需要自行验证
@@ -425,6 +813,33 @@ pwsh -File packaging\make_installer.ps1
 6. 分离结果**不是比特级可重建**的：四轨相加与原曲仍有约 2% 的残差（模型特性），
    需要 A/B 时请保留源轨。
 7. 模型与 ffmpeg 不在仓库里（见 `scripts/fetch-deps.ps1`），因此 clone 后首次运行前必须执行该脚本。
+
+---
+
+## Credits: Open-Source Projects
+
+This software would not exist without the projects below. Full licenses and source links are in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+| Project | Author / team | License | Used for |
+|---|---|---|---|
+| [Demucs v4](https://github.com/facebookresearch/demucs) | Alexandre Défossez & Meta AI Research | MIT | Stem separation models |
+| [htdemucs-onnx](https://huggingface.co/adowu/htdemucs-onnx) / [htdemucs-6s-onnx](https://huggingface.co/alekshandru/htdemucs-6s-onnx) | adowu / alekshandru | MIT | ONNX exports of the separation models |
+| [ONNX Runtime](https://github.com/microsoft/onnxruntime) | Microsoft | MIT | Inference runtime |
+| [miniaudio](https://github.com/mackron/miniaudio) | David Reid (mackron) | Public Domain / MIT-0 | WASAPI audio backend |
+| [Signalsmith Stretch](https://github.com/Signalsmith-Audio/signalsmith-stretch) | Signalsmith Audio (Geraint Luff) | MIT | Time-stretch and pitch-shift |
+| [FFmpeg](https://ffmpeg.org/) | The FFmpeg project and contributors | LGPL-3.0 | Decoding / encoding / transcoding |
+| [Qt for Python (PySide6)](https://doc.qt.io/qtforpython/) | The Qt Company | LGPL-3.0 | UI framework |
+| [NumPy](https://numpy.org/) | The NumPy developers | BSD-3-Clause | Numerical computing |
+| [soxr](https://sourceforge.net/projects/soxr/) | Rob Sykes et al. | LGPL-2.1 | Resampling |
+| [PyCryptodome](https://www.pycryptodome.org/) | Legrandin and contributors | BSD-2 / PD | NCM decryption |
+| [Noto Sans SC](https://fonts.google.com/noto) | Google | SIL OFL-1.1 | Chinese font (subsetted and renamed) |
+| [PyInstaller](https://pyinstaller.org/) | The PyInstaller team | GPL-2.0 + exception | Packaging |
+| [Inno Setup](https://jrsoftware.org/isinfo.php) | Jordan Russell, Martijn Laan | Free to use | Installer |
+
+**Interface and interaction references** (no code used): Logic Pro X (layout), Audacity / Ardour
+(interaction conventions), and the various Demucs GUIs (separation flow). Most of these are GPL;
+this project **does not** copy their code.
 
 ---
 
@@ -454,12 +869,44 @@ pwsh -File packaging\make_installer.ps1
 
 ---
 
+## License
+
+- This project's own code: **MIT** (see [LICENSE](LICENSE));
+- Third-party components: their own licenses, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md);
+- **Separation models**: the weights are MIT, but the training set MUSDB18-HQ is non-commercial →
+  use separation for personal study only and do not release separated stems commercially. For commercial
+  use, swap in a model with a suitable licence (adding one entry in `src/ab/sep/models.py` is enough).
+
+---
+
 ## 许可
 
 - 本项目自身代码：**MIT**（见 [LICENSE](LICENSE)）；
 - 第三方组件：各自许可证，见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)；
 - **分离模型**：权重 MIT，但训练集 MUSDB18-HQ 为非商用许可 → 分离功能请仅用于个人学习，
   不要把分离结果用于商业发行。需要商用请替换为自有许可的模型（`src/ab/sep/models.py` 里加一条即可）。
+
+---
+
+## Feedback Welcome
+
+This is an **AI-assisted project that is still being polished**, and every kind of feedback is welcome:
+
+- 🐛 **Bug reports** — please include
+  1. Steps to reproduce and the expected result;
+  2. The JSON produced by `AudioBench.exe --selftest --out s.json`;
+  3. The last lines of `%APPDATA%\AudioBench\logs\AudioBench.log`;
+  4. Your OS version and audio device (the WASAPI shared-mode device name).
+- 💡 **Suggestions** — features, interaction, wording, performance, anything. Describing "in which
+  situation it feels wrong" is far more useful than "add a feature".
+- 🔧 **Pull requests** — keep `pytest` green and explain the motivation in the description; for packaging
+  changes please also verify `dist\AudioBench.exe` (this project has been bitten by
+  "green in source, broken when frozen").
+- 📝 **Wording / translation fixes** — both languages; inconsistent terminology or text that reads like a
+  machine wrote it, just say so.
+
+If this project helped you, a ⭐ is the best encouragement; if something is wrong, say it plainly —
+**criticism improves it more than praise**.
 
 ---
 
