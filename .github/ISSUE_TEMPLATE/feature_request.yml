@@ -1,0 +1,21 @@
+name: 💡 功能建议
+description: 想要的能力、用起来不顺手的地方
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: scene
+    attributes:
+      label: 你在什么场景下觉得不好用？
+      description: 说清场景比直接说"加个功能"有用得多
+      placeholder: "扒带时想循环某两小节，现在每次都要重新拖 A-B……"
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: 你希望它怎么做
+  - type: textarea
+    id: alt
+    attributes:
+      label: 其它软件的类似做法（可选）
+      description: 例如 Logic / Audacity / 某个 Demucs GUI 是怎么处理的

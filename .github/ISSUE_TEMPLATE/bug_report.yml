@@ -1,0 +1,58 @@
+name: 🐛 Bug 反馈
+description: 功能异常、崩溃、音频/界面问题
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请尽量填完整，尤其是**自检 JSON** 和**日志尾部** —— 这两样能让定位时间从几小时缩到几分钟。
+  - type: textarea
+    id: what
+    attributes:
+      label: 现象
+      description: 发生了什么？你期望发生什么？
+      placeholder: |
+        点「分离」→ 完成后点「创建轨道」，状态栏显示「已分离出 0 条音轨」，但缓存目录里有 6 个 wav。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 导入 xxx.mp3（3:08，320kbps）
+        2. 点「分离」，模型选「四轨 · 高音质」，8 线程
+        3. 等待完成 → 点「创建轨道」
+        4. 出现「已分离出 0 条音轨」
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本与形态
+      description: 标题栏或 `--selftest` 里的版本号；安装版 / 绿色版 / 源码运行
+      placeholder: "0.5.1 · 安装版"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: 系统与音频设备
+      placeholder: "Windows 11 23H2 · WASAPI 共享模式 · Realtek(R) Audio"
+  - type: textarea
+    id: selftest
+    attributes:
+      label: 自检 JSON
+      description: 运行 `AudioBench.exe --selftest --out s.json`，把 s.json 内容贴在这里
+      render: json
+  - type: textarea
+    id: log
+    attributes:
+      label: 日志尾部
+      description: "`%APPDATA%\\AudioBench\\logs\\AudioBench.log` 最后 50 行左右"
+      render: text
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其它信息
+      description: 截图、录屏、崩溃日志路径（`%APPDATA%\\AudioBench\\crash\\`）等
