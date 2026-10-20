@@ -36,8 +36,8 @@ mp3 / wav / flac export — with a fully bilingual Chinese / English interface.
   naming templates; true-peak measurement with clipping warnings.
 - **Bilingual interface** — 217 strings in Chinese and English, switchable at any time.
 
-Everything runs locally: nothing is uploaded, no network connection is required (beyond the files you
-choose to import), and there are no accounts and no cloud sync.
+Everything runs locally: nothing is uploaded, the app never goes online, and there are no accounts and
+no cloud sync — the only files it touches are the ones you choose to import.
 
 **Requirements:** Windows 10 / 11 x64. FFmpeg and both separation models are bundled, so the app is
 ready to use offline right after installation.
@@ -64,8 +64,8 @@ mp3 / wav / flac 导出 —— 界面中英双语。
   支持命名模板；测量真实峰值并给出削波告警。
 - **双语界面** —— 217 条文案，中文与英文，可随时切换。
 
-一切都在本地运行：不上传任何数据，也不需要联网（除你主动导入的文件之外），
-没有账号体系，也没有云同步。
+一切都在本地运行：不上传任何数据，程序不会联网，也没有账号体系和云同步 ——
+参与处理的只有你主动导入的文件。
 
 **系统要求：** Windows 10 / 11 x64。已内置 FFmpeg 与两套分离模型，安装后即可离线使用。
 
