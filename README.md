@@ -7,6 +7,14 @@
 
 > 纯本地运行：不上传、不联网（除你主动导入本地文件外），不做账号体系，不做云同步。
 
+**下载**：[安装版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-setup-x64.exe)（260 MiB） ·
+[绿色版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-portable-win64.zip)（433 MiB） ·
+[校验值](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/SHA256SUMS.txt) ·
+[全部版本](https://github.com/LCinnovation/AudioBench/releases) · [更新日志](CHANGELOG.md)
+
+> 两个包都已内置 FFmpeg 与 4 轨 / 6 轨分离模型，装完即可离线使用。
+> 安装包**未做代码签名**，首次运行会被 SmartScreen 提示"未知发布者"，请先核对 `SHA256SUMS.txt`。
+
 **目录**：[AI 辅助编程声明](#关于-ai-辅助编程请先读这一段) ·
 [功能一览](#功能一览) · [安装](#安装) · [使用指南](#使用指南) · [命令行](#命令行) ·
 [快捷键](#快捷键) · [技术架构](#技术架构) · [从源码构建](#从源码构建) ·
@@ -71,7 +79,7 @@
 
 ### 方式一：安装版（推荐）
 
-1. 下载 `AudioBench-x.y.z-setup-x64.exe`；
+1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.5.1-setup-x64.exe`；
 2. 双击安装，默认装到 `%LOCALAPPDATA%\Programs\AudioBench`（**不需要管理员**，
    安装向导里也可以选"为所有用户安装"）；
 3. 开始菜单启动 **AudioBench**。
@@ -80,7 +88,7 @@
 
 ### 方式二：绿色版（便携）
 
-1. 解压 `AudioBench-x.y.z-portable-win64.zip` 到任意可写目录（U 盘也行）；
+1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.5.1-portable-win64.zip`，解压到任意可写目录（U 盘也行）；
 2. 双击 `AudioBench.exe`。
 
 目录里有 `portable.flag` 时进入**便携模式**：配置、日志、缓存全部写在同目录的 `userdata\`，
