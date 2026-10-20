@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest>=8
+pyinstaller>=6.10
+fonttools>=4.50

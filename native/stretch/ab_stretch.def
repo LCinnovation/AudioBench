@@ -1,0 +1,10 @@
+LIBRARY ab_stretch
+EXPORTS
+    ab_stretch_create
+    ab_stretch_destroy
+    ab_stretch_set_pitch
+    ab_stretch_reset
+    ab_stretch_process
+    ab_stretch_input_latency
+    ab_stretch_output_latency
+    ab_stretch_version

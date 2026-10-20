@@ -1,0 +1,46 @@
+# ---- 构建 / 运行产物（不入库）----
+.venv/
+dist/
+build/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+userdata/
+logs/
+crash/
+*.log
+
+# ---- 大体积二进制：用 scripts/fetch-deps.ps1 获取，不入库 ----
+assets/models/*.onnx
+tools/ffmpeg/
+native/build/
+*.dll
+*.lib
+*.exp
+*.obj
+*.pdb
+*.ilk
+
+# ---- 本地测试 / 实验 / 工程产物 ----
+build-env/
+poc-m0/results/
+poc-m0/out/
+*.abproj
+*.abpk
+*.ncm
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.ogg
+*.f32
+!docs/**/*.png
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store

@@ -1,0 +1,18 @@
+LIBRARY ab_audio
+EXPORTS
+    ab_open
+    ab_start
+    ab_stop
+    ab_close
+    ab_write
+    ab_flush
+    ab_set_target
+    ab_get_target
+    ab_info
+    ab_device_count
+    ab_device_name
+    ab_device_default
+    ab_last_error
+    ab_eq_process
+    ab_eq_reset
+    ab_version
