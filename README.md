@@ -1,11 +1,6 @@
 # AudioBench
 
-一个 **Windows 原生、离线运行的多轨音频工作站**：多轨编排、非破坏编辑、实时变速变调、
-六轨/四轨人声分离、NCM 格式转换、mp3/wav/flac 导出，中英双语界面。
-
-![新手引导](docs/screenshots/m4-frozen-guide.png)
-
-> 纯本地运行：不上传、不联网（除你主动导入本地文件外），不做账号体系，不做云同步。
+[**English**](#introduction) · [中文](#项目介绍)
 
 **下载**：[安装版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-setup-x64.exe)（260 MiB） ·
 [绿色版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-portable-win64.zip)（433 MiB） ·
@@ -13,7 +8,68 @@
 [全部版本](https://github.com/LCinnovation/AudioBench/releases) · [更新日志](CHANGELOG.md)
 
 > 两个包都已内置 FFmpeg 与 4 轨 / 6 轨分离模型，装完即可离线使用。
+>
 > 安装包**未做代码签名**，首次运行会被 SmartScreen 提示"未知发布者"，请先核对 `SHA256SUMS.txt`。
+
+![新手引导](docs/screenshots/m4-frozen-guide.png)
+
+---
+
+## Introduction
+
+**AudioBench is a native Windows, fully offline multi-track audio workstation.**
+It covers multi-track arranging, non-destructive editing, real-time time-stretching and
+pitch-shifting, 4-stem and 6-stem source separation, NCM format conversion, and
+mp3 / wav / flac export — with a fully bilingual Chinese / English interface.
+
+- **Multi-track arranging** — per-track colour band, index, icon, name, mute, solo, fader, pan,
+  low / high shelf, fade-in / fade-out handles and collapse, plus a mixer and a master fader with level meters.
+- **Non-destructive editing** — drag, edge-trim, split at the playhead with `S`, duplicate with `Ctrl+D`,
+  per-clip fades on linear or exponential curves, 200-level snapshot undo.
+- **Real-time time-stretch and pitch-shift** — 50–200% tempo change without altering pitch,
+  ±12 semitones without altering tempo; preview and export run through the same Signalsmith Stretch path.
+- **Stem separation** — 4 stems (drums / bass / other / vocals) or 6 stems (adding guitar / piano),
+  running in a separate process with progress, remaining time, cancel, and one-click track creation.
+- **NCM conversion** — local `.ncm` files to mp3 320/192/128, flac, or the original format,
+  with tags, cover art, non-overwriting filenames, and a CSV failure list.
+- **Export** — mp3 320/192/128, wav 16/24-bit, flac; full mix or the selected track only;
+  naming templates; true-peak measurement with clipping warnings.
+- **Bilingual interface** — 217 strings in Chinese and English, switchable at any time.
+
+Everything runs locally: nothing is uploaded, no network connection is required (beyond the files you
+choose to import), and there are no accounts and no cloud sync.
+
+**Requirements:** Windows 10 / 11 x64. FFmpeg and both separation models are bundled, so the app is
+ready to use offline right after installation.
+
+---
+
+## 项目介绍
+
+**AudioBench 是一个 Windows 原生、完全离线的多轨音频工作站。**
+涵盖多轨编排、非破坏编辑、实时变速变调、四轨与六轨人声分离、NCM 格式转换、
+mp3 / wav / flac 导出 —— 界面中英双语。
+
+- **多轨编排** —— 每条轨道带颜色条、序号、图标、名称、静音、独奏、推子、声像、
+  低架、高架、渐入渐出手柄与折叠，另有混音器和带电平表的主推子。
+- **非破坏编辑** —— 拖动、边缘裁剪、在播放头处按 `S` 分割、`Ctrl+D` 复制、
+  片段淡入淡出可选线性或指数曲线，200 层快照式撤销。
+- **实时变速变调** —— 50–200% 改变时长而不变音高，±12 半音改变音高而不变速度；
+  预览与导出走同一套 Signalsmith Stretch 算法。
+- **人声分离** —— 四轨（drums / bass / other / vocals）或六轨（增加 guitar / piano），
+  在独立进程中运行，支持进度、剩余时间、取消与一键建轨。
+- **NCM 转换** —— 把本地 `.ncm` 转为 mp3 320/192/128、flac 或保持原格式，
+  写入标签与封面，同名自动避让，失败项导出 CSV 清单。
+- **导出** —— mp3 320/192/128、wav 16/24 位、flac；可导出整个混音或仅选中轨道；
+  支持命名模板；测量真实峰值并给出削波告警。
+- **双语界面** —— 217 条文案，中文与英文，可随时切换。
+
+一切都在本地运行：不上传任何数据，也不需要联网（除你主动导入的文件之外），
+没有账号体系，也没有云同步。
+
+**系统要求：** Windows 10 / 11 x64。已内置 FFmpeg 与两套分离模型，安装后即可离线使用。
+
+---
 
 **目录**：[AI 辅助编程声明](#关于-ai-辅助编程请先读这一段) ·
 [功能一览](#功能一览) · [安装](#安装) · [使用指南](#使用指南) · [命令行](#命令行) ·
