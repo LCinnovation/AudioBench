@@ -80,17 +80,20 @@ def convert(job: NcmJob, *, progress=None, cancel=None) -> Path:
         except OSError:
             pass
 
-    # 截断交叉校验：FLAC 的 STREAMINFO 会声称完整长度，实际解码却更短
-    expected = decoder.expected_samples(payload)
-    if expected:
+    # 截断交叉校验：FLAC 的 STREAMINFO 声称完整长度，实际解码却更短。
+    # 注意必须比「时长」而不是样本数——高解析音源（96 kHz）转 mp3 会降到 44.1/48 kHz，
+    # 直接比样本数会把正常文件误判成截断（0.6.1 之前的 bug）。
+    si = decoder.flac_streaminfo(payload)
+    if si and si.get("total_samples") and si.get("sample_rate"):
+        expected_s = si["total_samples"] / float(si["sample_rate"])
         try:
-            info = ffmpeg.probe(out)
-            got = int(round(info.duration_s * info.sample_rate)) if info.sample_rate else 0
+            got_s = float(ffmpeg.probe(out).duration_s)
         except Exception:
-            got = 0
-        if got and got < expected * 0.99:
+            got_s = 0.0
+        if got_s and got_s + max(0.15, expected_s * 0.01) < expected_s:
             job.status = "failed"
-            job.message = f"payload truncated ({got}/{expected} samples)"
+            job.message = (f"payload truncated ({got_s:.2f}s of {expected_s:.2f}s, "
+                           f"source {si['sample_rate']} Hz/{si['bits']} bit)")
             try:
                 out.unlink()
             except OSError:

@@ -12,7 +12,7 @@ ASSETS = ROOT / "assets"
 FFMPEG = ROOT / "tools" / "ffmpeg" / "bin"
 
 datas = []
-for sub in ("i18n", "fonts", "icons", "models"):
+for sub in ("i18n", "fonts", "icons", "models", "guide"):
     p = ASSETS / sub
     if p.exists():
         datas.append((str(p), f"assets/{sub}"))

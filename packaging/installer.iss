@@ -4,7 +4,7 @@
 ; 构建： pwsh -File packaging\make_installer.ps1
 
 #define MyAppName "AudioBench"
-#define MyAppVersion "0.5.1"
+#define MyAppVersion "0.6.2"
 #define MyAppPublisher "AudioBench"
 #define MyAppExeName "AudioBench.exe"
 
@@ -26,7 +26,7 @@ Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
 UninstallDisplayIcon={app}\{#MyAppExeName}
-VersionInfoVersion=0.5.1.0
+VersionInfoVersion=0.6.2.0
 VersionInfoDescription={#MyAppName} installer
 SetupLogging=yes
 

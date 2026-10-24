@@ -614,8 +614,14 @@ class MainWindow(QMainWindow):
         sr = st.project.sample_rate
         instruments = {"vocals": "vocal", "drums": "drum", "bass": "bass",
                        "guitar": "guitar", "piano": "piano", "other": "other"}
-        names = {"vocals": "Vocals", "drums": "Drums", "bass": "Bass",
-                 "guitar": "Guitar", "piano": "Piano", "other": "Other (incl. strings)"}
+        names = {
+            "vocals": tr("Stem", "Vocals"),
+            "drums": tr("Stem", "Drums"),
+            "bass": tr("Stem", "Bass"),
+            "guitar": tr("Stem", "Guitar"),
+            "piano": tr("Stem", "Piano"),
+            "other": tr("Stem", "Other (incl. strings)"),
+        }
         created = 0
         failed: list[str] = []
         # 曲名：优先用对话框给的 source_name，其次退回输入文件名/目录名
@@ -764,33 +770,47 @@ class MainWindow(QMainWindow):
 
     # ---------------------------------------------------------------- 引导 / 帮助
     def build_onboarding_steps(self):
+        """新手引导：每一步都说清「怎么做 / 会看到什么 / 出问题怎么办」。"""
         from .onboarding import Step
 
         return [
-            Step(tr("Guide", "1. Bring your audio in"),
-                 tr("Guide", "Drag wav / mp3 / flac files onto the timeline, or press Ctrl+I. "
-                             "Every file becomes a track with its own colour."),
+            Step(tr("Guide", "Step 1 · Bring a song in"),
+                 tr("Guide", "Hold your song with the mouse (mp3, wav or flac), drag it onto the "
+                             "dark area below and let go. You can also press Ctrl+I and pick a file.\n"
+                             "A long bar appears — that bar is your song."),
                  lambda: self.timeline,
-                 tr("Guide", "Tip: you can also drop files onto the window.")),
-            Step(tr("Guide", "2. Play, loop, slow down"),
-                 tr("Guide", "Space plays and stops. Shift-drag on the ruler sets an A-B loop. "
-                             "Turn on the metronome when practising a part."),
-                 lambda: self.transport),
-            Step(tr("Guide", "3. Trim, fade, change speed"),
-                 tr("Guide", "Drag a clip edge to trim, drag its top corners for fades. "
-                             "Select a clip and use the inspector to change speed 50–200% "
-                             "(pitch kept) or pitch ±12 semitones (tempo kept)."),
+                 tr("Guide", "Nothing happens? Check the file ends with mp3/wav/flac/ogg/m4a/aac/wma.")),
+            Step(tr("Guide", "Step 2 · Press Space to listen"),
+                 tr("Guide", "Space starts and stops playback; Home jumps back to the beginning.\n"
+                             "To practise one part over and over, hold Shift and drag a short "
+                             "range on the ruler — that range will loop."),
+                 lambda: self.transport,
+                 tr("Guide", "No sound? Look at the M (mute) button on the track first.")),
+            Step(tr("Guide", "Step 3 · Meet the track panel"),
+                 tr("Guide", "Left of every bar is a small panel: the song name on top "
+                             "(double-click to rename), M mutes, S solos (only that track plays), "
+                             "the round knob is volume, EQ shapes high and low frequencies.\n"
+                             "Not sure what a button does? Hover over it for a tooltip."),
+                 lambda: self.headers),
+            Step(tr("Guide", "Step 4 · Select a bar to edit it"),
+                 tr("Guide", "Click a bar once to select it. A row of controls appears above: "
+                             "speed (slower/faster, pitch stays), pitch (key change, speed stays), "
+                             "volume, fade in and fade out.\n"
+                             "Drag the left or right edge of the bar to trim it. Wrong move? Ctrl+Z."),
                  lambda: self.inspector),
-            Step(tr("Guide", "4. Separate into stems"),
-                 tr("Guide", "The stem button splits a song into vocals / drums / bass / "
-                             "guitar / piano / other. Progress and ETA are shown; you can "
-                             "cancel at any time."),
+            Step(tr("Guide", "Step 5 · Split vocals from backing"),
+                 tr("Guide", "Click the person icon at the far right of the transport bar, keep "
+                             "\"4 stems · high quality\", then press Start.\n"
+                             "When the progress bar finishes, press Create tracks: vocals, drums, "
+                             "bass and other appear, and the original track is muted for you."),
                  lambda: self.transport.feature_buttons.get("separate"),
-                 tr("Guide", "Runs offline on CPU. The 'other' stem also contains strings.")),
-            Step(tr("Guide", "5. Export when done"),
-                 tr("Guide", "Ctrl+E exports the mix or a single track to mp3 / wav / flac. "
-                             "Names follow the template and the folder opens when finished."),
-                 lambda: self.transport.feature_buttons.get("export")),
+                 tr("Guide", "A 3-minute song takes about 1 minute. You can cancel any time.")),
+            Step(tr("Guide", "Step 6 · Export an mp3"),
+                 tr("Guide", "Press Ctrl+E: choose a format (mp3 320 is the usual choice), pick a "
+                             "folder and press Start.\n"
+                             "The folder opens with your new file selected when it is done."),
+                 lambda: self.transport.feature_buttons.get("export"),
+                 tr("Guide", "Press F1 any time to reopen this tutorial and the shortcut list.")),
         ]
 
     def start_onboarding(self) -> None:
@@ -826,7 +846,8 @@ class MainWindow(QMainWindow):
     def open_help(self) -> None:
         from .dialogs.help import HelpPanel
 
-        dlg = HelpPanel(self, on_replay=self.start_onboarding)
+        lang = getattr(self.i18n, "language", "zh_CN")
+        dlg = HelpPanel(self, on_replay=self.start_onboarding, lang=lang)
         dlg.exec()
 
     def resizeEvent(self, e):

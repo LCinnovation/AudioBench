@@ -240,13 +240,14 @@ def _decode(blob: bytes) -> dict:
 
 # ---------------------------------------------------------------- fixtures
 
-def make_flac(seconds: float = 1.0, sr: int = 44100) -> bytes:
+def make_flac(seconds: float = 1.0, sr: int = 44100, subtype: str = "PCM_16") -> bytes:
+    """生成 FLAC 载荷。subtype 可传 PCM_24 模拟高解析（96k/24bit）文件。"""
     import soundfile as sf
     t = np.arange(int(sr * seconds), dtype=np.float32) / sr
     left = 0.4 * np.sin(2 * np.pi * 440 * t)
     right = 0.4 * np.sin(2 * np.pi * 554.37 * t)
     buf = io.BytesIO()
-    sf.write(buf, np.stack([left, right], axis=1), sr, format="FLAC", subtype="PCM_16")
+    sf.write(buf, np.stack([left, right], axis=1), sr, format="FLAC", subtype=subtype)
     return buf.getvalue()
 
 

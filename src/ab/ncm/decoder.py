@@ -177,22 +177,30 @@ def read_file(path) -> dict:
         return decode_ncm(f.read(), name=str(path))
 
 
-def expected_samples(payload: bytes) -> int | None:
-    """从 FLAC 载荷的 STREAMINFO 里读「声明样本数」（不解码）。
+def flac_streaminfo(payload: bytes) -> dict | None:
+    """读 FLAC 载荷的 STREAMINFO（不解码）。非 FLAC 或头部不完整时返回 None。
 
-    载荷被截断时这里仍然写着完整长度，转码后拿实际样本数一对比就能发现截断
-    （NCM 头本身没有载荷长度字段，只能靠容器自述长度做交叉校验）。
-    非 FLAC 或头部不完整时返回 None。
+    高解析音源（96 kHz / 24 bit）很常见，转成 mp3 后采样率会变，
+    所以调用方必须用**时长**比较，不能直接比样本数。
     """
     if not payload.startswith(b"fLaC") or len(payload) < 4 + 4 + 34:
         return None
-    block = payload[4:8]
-    if block[0] != 0x00:                 # 第一个 metadata block 必须是 STREAMINFO
+    if payload[4] != 0x00:                 # 第一个 metadata block 必须是 STREAMINFO
         return None
     si = payload[8:8 + 34]
     b = si[10:18]
+    rate = (b[0] << 12) | (b[1] << 4) | (b[2] >> 4)
+    channels = ((b[2] >> 1) & 0x07) + 1
+    bits = (((b[2] & 1) << 4) | (b[3] >> 4)) + 1
     total = ((b[3] & 0x0F) << 32) | (b[4] << 24) | (b[5] << 16) | (b[6] << 8) | b[7]
-    return int(total) or None
+    return {"sample_rate": int(rate), "channels": channels, "bits": bits,
+            "total_samples": int(total)}
+
+
+def expected_samples(payload: bytes) -> int | None:
+    """FLAC 载荷声明的样本数（不解码）；用于发现载荷被截断。"""
+    info = flac_streaminfo(payload)
+    return (info or {}).get("total_samples") or None
 
 
 def friendly_meta(metadata: dict | None) -> dict:

@@ -185,202 +185,116 @@
   <context>
     <name>Guide</name>
     <message>
-      <source>1. Bring your audio in</source>
-      <translation>1. 把音频导进来</translation>
-    </message>
-    <message>
-      <source>1. Drag audio files onto the timeline, or press Ctrl+I.
-2. Supported: wav / mp3 / flac / ogg / m4a / aac / wma.
-3. Each file becomes a track; the colour bar and icon identify it.
-4. Double-click a track name to rename it.</source>
-      <translation>1. 把音频文件拖到时间线，或按 Ctrl+I。
-2. 支持 wav / mp3 / flac / ogg / m4a / aac / wma。
-3. 每个文件变成一条轨道，左侧色条与图标用于识别。
-4. 双击轨道名可以重命名。</translation>
-    </message>
-    <message>
-      <source>1. Press Ctrl+E (or the export button).
-2. Choose format (mp3 320/192/128, wav 16/24, flac), scope and folder.
-3. File names follow {track}_{index}_{date}; illegal characters are replaced.
-4. When it finishes the folder opens with the file selected.</source>
-      <translation>1. 按 Ctrl+E（或点导出按钮）。
-2. 选格式（mp3 320/192/128、wav 16/24、flac）、范围和目录。
-3. 文件名按 {track}_{index}_{date} 生成，非法字符会被替换。
-4. 完成后会自动打开目录并选中文件。</translation>
-    </message>
-    <message>
-      <source>1. Press the stem button in the transport bar.
-2. Pick the source track (or a file) and choose the stems you need.
-3. Watch progress and ETA; cancel at any time — no tracks are created.
-4. On finish press Create tracks: six tracks appear and the source is muted.
-   The 'other' stem also contains strings.</source>
-      <translation>1. 点击走带条右侧的分离按钮。
-2. 选择源轨道（或文件），勾选需要的分离轨。
-3. 观察进度与预计剩余时间；随时可取消，取消不会产生任何轨道。
-4. 完成后点「创建轨道」：出现六条轨道，源轨自动静音。
-   other 轨里也包含弦乐。</translation>
-    </message>
-    <message>
-      <source>1. Shift-drag on the ruler to set an A-B loop; double-click to clear.
-2. Turn on the metronome for a steady click.
-3. Select a clip and set speed 50–200% (pitch kept) or pitch ±12 semitones (tempo kept) in the inspector.
-4. Solo a track (S) to practise along.</source>
-      <translation>1. 在标尺上按住 Shift 拖动设置 A-B 循环，双击取消。
-2. 打开节拍器，跟着稳定的咔哒声练习。
-3. 选中片段，在检查器里设速度 50–200%（保持音高）或变调 ±12 半音（保持速度）。
-4. 用 S 独奏某条轨道，便于跟弹。</translation>
-    </message>
-    <message>
-      <source>2. Play, loop, slow down</source>
-      <translation>2. 播放、循环、放慢</translation>
-    </message>
-    <message>
-      <source>3. Trim, fade, change speed</source>
-      <translation>3. 裁剪、淡变、变速</translation>
-    </message>
-    <message>
-      <source>4. Separate into stems</source>
-      <translation>4. 分离成六轨</translation>
-    </message>
-    <message>
-      <source>5. Export when done</source>
-      <translation>5. 完成后导出</translation>
-    </message>
-    <message>
-      <source>Action</source>
-      <translation>动作</translation>
-    </message>
-    <message>
-      <source>Add marker at playhead</source>
-      <translation>在播放头加标记</translation>
-    </message>
-    <message>
-      <source>AudioBench in four steps</source>
-      <translation>四步上手 AudioBench</translation>
+      <source>A 3-minute song takes about 1 minute. You can cancel any time.</source>
+      <translation>3 分钟的歌大约要 1 分钟；中途不想等可以点「取消」。</translation>
     </message>
     <message>
       <source>Back</source>
       <translation>上一步</translation>
     </message>
     <message>
-      <source>Back to start</source>
-      <translation>回到起点</translation>
+      <source>Beginner's guide</source>
+      <translation>新手教程</translation>
     </message>
     <message>
-      <source>Ctrl+E exports the mix or a single track to mp3 / wav / flac. Names follow the template and the folder opens when finished.</source>
-      <translation>Ctrl+E 导出混音或单轨为 mp3 / wav / flac，文件名按模板生成，完成后自动打开目录。</translation>
+      <source>Click a bar once to select it. A row of controls appears above: speed (slower/faster, pitch stays), pitch (key change, speed stays), volume, fade in and fade out.
+Drag the left or right edge of the bar to trim it. Wrong move? Ctrl+Z.</source>
+      <translation>在横条上单击一下，它会被选中，上方出现一排控件：速度（放慢/加快，音高不变）、变调、音量、渐入/渐出。
+拖横条的左右边缘可以剪短；拖错了按 Ctrl+Z 撤销。</translation>
     </message>
     <message>
-      <source>Delete selected clip</source>
-      <translation>删除选中片段</translation>
+      <source>Click the person icon at the far right of the transport bar, keep "4 stems · high quality", then press Start.
+When the progress bar finishes, press Create tracks: vocals, drums, bass and other appear, and the original track is muted for you.</source>
+      <translation>点走带条最右边的人形按钮，保持「四轨 · 高音质」，点「开始分离」。
+等进度条走完，再点「创建轨道」，就会多出人声、鼓、贝斯、其他四条轨道，原来那条会自动静音。</translation>
+    </message>
+    <message>
+      <source>Close</source>
+      <translation>关闭</translation>
     </message>
     <message>
       <source>Done</source>
       <translation>完成</translation>
     </message>
     <message>
-      <source>Drag a clip edge to trim, drag its top corners for fades. Select a clip and use the inspector to change speed 50–200% (pitch kept) or pitch ±12 semitones (tempo kept).</source>
-      <translation>拖片段左右边缘可裁剪，拖上沿两角做淡入淡出。选中片段后，在上方检查器里改速度 50–200%（保持音高）或变调 ±12 半音（保持速度）。</translation>
-    </message>
-    <message>
-      <source>Drag wav / mp3 / flac files onto the timeline, or press Ctrl+I. Every file becomes a track with its own colour.</source>
-      <translation>把 wav / mp3 / flac 文件拖到时间线，或按 Ctrl+I。每个文件都会变成一条带颜色的轨道。</translation>
-    </message>
-    <message>
-      <source>Duplicate clip</source>
-      <translation>复制片段</translation>
-    </message>
-    <message>
-      <source>Export</source>
-      <translation>导出</translation>
-    </message>
-    <message>
-      <source>Export audio</source>
-      <translation>导出音频</translation>
-    </message>
-    <message>
       <source>Help</source>
       <translation>帮助</translation>
     </message>
     <message>
-      <source>Import audio</source>
-      <translation>导入音频</translation>
+      <source>Hold your song with the mouse (mp3, wav or flac), drag it onto the dark area below and let go. You can also press Ctrl+I and pick a file.
+A long bar appears — that bar is your song.</source>
+      <translation>用鼠标按住你的歌（mp3、wav、flac 都行），拖到下面这块深色区域，松手就行；也可以按 Ctrl+I 选文件。
+拖进来后，会多出一条横条——那就是这首歌。</translation>
     </message>
     <message>
-      <source>Key</source>
-      <translation>按键</translation>
-    </message>
-    <message>
-      <source>Keyboard shortcuts</source>
-      <translation>快捷键</translation>
-    </message>
-    <message>
-      <source>Loop and slow down</source>
-      <translation>循环与放慢</translation>
+      <source>Left of every bar is a small panel: the song name on top (double-click to rename), M mutes, S solos (only that track plays), the round knob is volume, EQ shapes high and low frequencies.
+Not sure what a button does? Hover over it for a tooltip.</source>
+      <translation>每条横条左边是一个小面板：最上面是歌名（双击可以改名），M 是静音、S 是独奏（只听这一条），圆钮是音量，EQ 是高低音。
+拿不准就先把鼠标停上去，会显示提示。</translation>
     </message>
     <message>
       <source>Next</source>
       <translation>下一步</translation>
     </message>
     <message>
-      <source>Open this help</source>
-      <translation>打开本帮助</translation>
+      <source>No sound? Look at the M (mute) button on the track first.</source>
+      <translation>没声音？先看轨道上的 M（静音）有没有被点亮。</translation>
     </message>
     <message>
-      <source>Play / pause</source>
-      <translation>播放/暂停</translation>
+      <source>Nothing happens? Check the file ends with mp3/wav/flac/ogg/m4a/aac/wma.</source>
+      <translation>没反应？确认文件后缀是 mp3/wav/flac/ogg/m4a/aac/wma 之一。</translation>
+    </message>
+    <message>
+      <source>Press Ctrl+E: choose a format (mp3 320 is the usual choice), pick a folder and press Start.
+The folder opens with your new file selected when it is done.</source>
+      <translation>按 Ctrl+E 打开导出窗口：选格式（mp3 320 最常用）、选文件夹，点「开始导出」。
+完成后会自动打开文件夹并选中文件。</translation>
+    </message>
+    <message>
+      <source>Press F1 any time to reopen this tutorial and the shortcut list.</source>
+      <translation>随时按 F1 可以重新打开这份教程和快捷键表。</translation>
     </message>
     <message>
       <source>Replay the guided tour</source>
       <translation>重播新手引导</translation>
     </message>
     <message>
-      <source>Runs offline on CPU. The 'other' stem also contains strings.</source>
-      <translation>纯 CPU 离线推理；other 轨里也包含弦乐。</translation>
-    </message>
-    <message>
-      <source>Save / save as</source>
-      <translation>保存 / 另存为</translation>
-    </message>
-    <message>
-      <source>Separate stems</source>
-      <translation>分离轨道</translation>
-    </message>
-    <message>
-      <source>Set A-B loop</source>
-      <translation>设置 A-B 循环</translation>
-    </message>
-    <message>
-      <source>Shortcut customisation is planned; the table above is read-only for now.</source>
-      <translation>快捷键自定义排在后续版本，上表当前只读。</translation>
-    </message>
-    <message>
-      <source>Show / hide mixer</source>
-      <translation>显示/收起混音器</translation>
-    </message>
-    <message>
       <source>Skip</source>
       <translation>跳过</translation>
     </message>
     <message>
-      <source>Space plays and stops. Shift-drag on the ruler sets an A-B loop. Turn on the metronome when practising a part.</source>
-      <translation>空格播放/停止；在标尺上按住 Shift 拖动可设 A-B 循环；练习某一段时打开节拍器。</translation>
+      <source>Space starts and stops playback; Home jumps back to the beginning.
+To practise one part over and over, hold Shift and drag a short range on the ruler — that range will loop.</source>
+      <translation>按空格键开始播放，再按一下停止；按 Home 回到开头。
+想反复练同一段：按住 Shift 在顶部刻度尺上拖一小段，就会循环这一段。</translation>
     </message>
     <message>
-      <source>Split at playhead</source>
-      <translation>在播放头处分割</translation>
+      <source>Step 1 · Bring a song in</source>
+      <translation>第 1 步：把歌拖进来</translation>
+    </message>
+    <message>
+      <source>Step 2 · Press Space to listen</source>
+      <translation>第 2 步：按空格试听</translation>
+    </message>
+    <message>
+      <source>Step 3 · Meet the track panel</source>
+      <translation>第 3 步：认识左边这一栏</translation>
+    </message>
+    <message>
+      <source>Step 4 · Select a bar to edit it</source>
+      <translation>第 4 步：选中就能改</translation>
+    </message>
+    <message>
+      <source>Step 5 · Split vocals from backing</source>
+      <translation>第 5 步：分开人声和伴奏</translation>
+    </message>
+    <message>
+      <source>Step 6 · Export an mp3</source>
+      <translation>第 6 步：导出成 mp3</translation>
     </message>
     <message>
       <source>Step {i} / {n}</source>
       <translation>第 {i}/{n} 步</translation>
-    </message>
-    <message>
-      <source>The stem button splits a song into vocals / drums / bass / guitar / piano / other. Progress and ETA are shown; you can cancel at any time.</source>
-      <translation>分离按钮把一首歌拆成 人声/鼓/贝斯/吉他/钢琴/其他 六轨，显示进度与剩余时间，随时可取消。</translation>
-    </message>
-    <message>
-      <source>Tip: you can also drop files onto the window.</source>
-      <translation>小提示：文件也可以直接拖到窗口上。</translation>
     </message>
     <message>
       <source>Tour finished — press F1 for help</source>
@@ -389,14 +303,6 @@
     <message>
       <source>Tour skipped — press F1 to open help</source>
       <translation>已跳过引导——按 F1 打开帮助</translation>
-    </message>
-    <message>
-      <source>Undo / redo</source>
-      <translation>撤销 / 重做</translation>
-    </message>
-    <message>
-      <source>Zoom timeline</source>
-      <translation>缩放时间线</translation>
     </message>
   </context>
   <context>
@@ -803,6 +709,33 @@
     <message>
       <source>Importing...</source>
       <translation>导入中...</translation>
+    </message>
+  </context>
+  <context>
+    <name>Stem</name>
+    <message>
+      <source>Bass</source>
+      <translation>贝斯</translation>
+    </message>
+    <message>
+      <source>Drums</source>
+      <translation>鼓</translation>
+    </message>
+    <message>
+      <source>Guitar</source>
+      <translation>吉他</translation>
+    </message>
+    <message>
+      <source>Other (incl. strings)</source>
+      <translation>其他（含弦乐）</translation>
+    </message>
+    <message>
+      <source>Piano</source>
+      <translation>钢琴</translation>
+    </message>
+    <message>
+      <source>Vocals</source>
+      <translation>人声</translation>
     </message>
   </context>
   <context>

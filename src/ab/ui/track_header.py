@@ -146,7 +146,7 @@ class TrackHeader(QWidget):
         self.eq_btn.setToolTip(tr("TrackHeader", "EQ on/off"))
         self.eq_btn.clicked.connect(self._toggle_eq)
 
-        self.collapse = QPushButton("▾", self)
+        self.collapse = QPushButton("▼", self)
         self.collapse.setGeometry(200, 50, 18, 18)
         self.collapse.setCheckable(True)
         self.collapse.setChecked(track.collapsed)

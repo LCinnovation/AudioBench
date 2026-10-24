@@ -2,18 +2,18 @@
 
 [**English**](#introduction) · [中文](#项目介绍)
 
-**Download**: [Installer](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-setup-x64.exe) (260 MiB) ·
-[Portable](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-portable-win64.zip) (433 MiB) ·
-[Checksums](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/SHA256SUMS.txt) ·
+**Download**: [Installer](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-setup-x64.exe) (260 MiB) ·
+[Portable](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-portable-win64.zip) (433 MiB) ·
+[Checksums](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/SHA256SUMS.txt) ·
 [All releases](https://github.com/LCinnovation/AudioBench/releases) · [Changelog](CHANGELOG.md)
 
 > Both packages bundle FFmpeg and the 4-stem / 6-stem separation models, so the app works offline right after installation.
 >
 > The installers are **not code-signed**; SmartScreen will warn about an "unknown publisher" on first run. Please verify `SHA256SUMS.txt` first.
 
-**下载**：[安装版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-setup-x64.exe)（260 MiB） ·
-[绿色版](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/AudioBench-0.5.1-portable-win64.zip)（433 MiB） ·
-[校验值](https://github.com/LCinnovation/AudioBench/releases/download/v0.5.1/SHA256SUMS.txt) ·
+**下载**：[安装版](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-setup-x64.exe)（260 MiB） ·
+[绿色版](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-portable-win64.zip)（433 MiB） ·
+[校验值](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/SHA256SUMS.txt) ·
 [全部版本](https://github.com/LCinnovation/AudioBench/releases) · [更新日志](CHANGELOG.md)
 
 > 两个包都已内置 FFmpeg 与 4 轨 / 6 轨分离模型，装完即可离线使用。
@@ -105,7 +105,7 @@ Every section below appears in English first, followed by the Chinese version of
 ## Quick Start
 
 ```text
-1. Launch AudioBench.exe (the 5-step guide appears on first run and can be skipped)
+1. Launch AudioBench.exe (the 6-step guide appears on first run and can be skipped)
 2. Press Ctrl+I to import a song, or drag the file onto the timeline
 3. Space to play; drag a clip edge to trim; select a clip to change speed or pitch
 4. Click "Separate" on the right of the transport bar → choose the 4-stem model → start → create tracks
@@ -119,7 +119,7 @@ If something looks wrong, press `F1` for the help panel, or run `AudioBench.exe 
 ## 三分钟上手
 
 ```text
-1. 启动 AudioBench.exe（首次启动会弹 5 步引导，可跳过）
+1. 启动 AudioBench.exe（首次启动会弹 6 步引导，可跳过）
 2. Ctrl+I 导入一首歌，或直接把文件拖到时间线上
 3. 空格播放；拖片段边缘裁剪；选中片段改速度/变调
 4. 点走带条右侧「分离」→ 选四轨模型 → 开始分离 → 创建轨道
@@ -188,7 +188,7 @@ review (see [License](#license)).
 | Export | mp3 320/192/128, wav 16/24-bit, flac; full mix or a single track; naming templates; true-peak and clipping warnings | ✅ |
 | Projects | Save / save as / recent projects / 30-second autosave / crash recovery | ✅ |
 | Markers & grid | `M` adds a marker; green flags on the ruler jump on click, right-click to rename or delete; BPM-based 4/4 bar grid | ✅ |
-| Guidance & help | 5-step first-run overlay, `F1` help panel (four walkthroughs + shortcut table + replay guide) | ✅ |
+| Guidance & help | 6-step first-run overlay, `F1` illustrated tutorial (bundled HTML with screenshots, Chinese / English) plus the shortcut table and a replay button | ✅ |
 | Bilingual | 217 strings, Chinese / English | ✅ |
 
 ---
@@ -208,7 +208,7 @@ review (see [License](#license)).
 | 导出 | mp3 320/192/128、wav 16/24、flac；混音或单轨；命名模板；真实峰值与削波告警 | ✅ |
 | 工程 | 保存 / 另存 / 最近工程 / 30 秒自动草稿 / 崩溃后恢复 | ✅ |
 | 标记与网格 | `M` 加标记、标尺绿旗点击跳转、右键改名删除；按 BPM 的 4/4 小节网格 | ✅ |
-| 引导与帮助 | 首启 5 步浮层、`F1` 帮助面板（四段实操 + 快捷键表 + 重播引导） | ✅ |
+| 引导与帮助 | 首启 6 步浮层、`F1` 图文教程（随包 HTML，含截图，中英双语），附快捷键表与重播按钮 | ✅ |
 | 双语 | 中文 / English 全量 217 条字符串 | ✅ |
 
 ---
@@ -217,7 +217,7 @@ review (see [License](#license)).
 
 ### Option 1: Installer (recommended)
 
-1. Download `AudioBench-0.5.1-setup-x64.exe` from [Releases](https://github.com/LCinnovation/AudioBench/releases);
+1. Download `AudioBench-0.6.2-setup-x64.exe` from [Releases](https://github.com/LCinnovation/AudioBench/releases);
 2. Double-click to install — the default target is `%LOCALAPPDATA%\Programs\AudioBench`
    (**no administrator rights needed**; the wizard also offers a per-machine install);
 3. Launch **AudioBench** from the Start menu.
@@ -226,7 +226,7 @@ The uninstaller asks whether to keep projects and settings; a silent uninstall k
 
 ### Option 2: Portable
 
-1. Download `AudioBench-0.5.1-portable-win64.zip` from [Releases](https://github.com/LCinnovation/AudioBench/releases)
+1. Download `AudioBench-0.6.2-portable-win64.zip` from [Releases](https://github.com/LCinnovation/AudioBench/releases)
    and extract it to any writable folder (a USB stick works);
 2. Double-click `AudioBench.exe`.
 
@@ -255,7 +255,7 @@ To build installers, see [Building from Source](#building-from-source).
 
 ### 方式一：安装版（推荐）
 
-1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.5.1-setup-x64.exe`；
+1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.6.2-setup-x64.exe`；
 2. 双击安装，默认装到 `%LOCALAPPDATA%\Programs\AudioBench`（**不需要管理员**，
    安装向导里也可以选"为所有用户安装"）；
 3. 开始菜单启动 **AudioBench**。
@@ -264,7 +264,7 @@ To build installers, see [Building from Source](#building-from-source).
 
 ### 方式二：绿色版（便携）
 
-1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.5.1-portable-win64.zip`，解压到任意可写目录（U 盘也行）；
+1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.6.2-portable-win64.zip`，解压到任意可写目录（U 盘也行）；
 2. 双击 `AudioBench.exe`。
 
 目录里有 `portable.flag` 时进入**便携模式**：配置、日志、缓存全部写在同目录的 `userdata\`，
@@ -403,9 +403,9 @@ A 3-minute, three-track project exports in about **2.6 seconds** (~70× real tim
 
 ### 9. First-run guide and help
 
-- The **5-step guide** opens automatically on first launch (import → playback and looping → editing and stretching → separation → export) and can be skipped;
+- The **6-step guide** opens automatically on first launch (bring a song in → press Space to listen → meet the track panel → select a bar to edit it → split vocals from backing → export an mp3) and can be skipped;
 - **Once skipped or completed, it no longer opens automatically**;
-- Press **F1** at any time for the help panel: four walkthroughs + the shortcut table, plus "Replay guide".
+- Press **F1** at any time for the illustrated tutorial bundled with the app: screenshots, plain-language steps, an FAQ and the shortcut table, plus "Replay guide".
 
 ### 10. Projects and autosave
 
@@ -527,9 +527,9 @@ AudioBench.exe --ncm-batch a\song.ncm b\song.ncm --ncm-out D:\out --ncm-fmt flac
 
 ### 9. 新手引导与帮助
 
-- 首次启动自动弹出 **5 步引导**（导入 → 播放循环 → 编辑变速 → 分离 → 导出），可跳过；
+- 首次启动自动弹出 **6 步引导**（拖入歌曲 → 空格试听 → 认识轨道面板 → 选中编辑 → 分离人声 → 导出 mp3），可跳过；
 - **跳过或走完一次后不再自动弹**；
-- 任何时候按 **F1** 打开帮助面板：四段实操 + 快捷键表，还能「重播引导」。
+- 任何时候按 **F1** 打开随包图文教程：带截图的分步说明、常见问题表、快捷键表，还能「重播引导」。
 
 ### 10. 工程与自动恢复
 
@@ -557,7 +557,7 @@ Sample `--selftest` output (excerpt):
 
 ```json
 {
-  "app": {"version": "0.5.1", "frozen": true, "mode": "install"},
+  "app": {"version": "0.6.2", "frozen": true, "mode": "install"},
   "ffmpeg": {"path": "...", "has_libmp3lame": true},
   "sep": {"default_model": "4s",
           "models": {"4s": {"present": true, "size_mb": 329.1},
@@ -587,7 +587,7 @@ AudioBench.exe --capture shot.png --capture-after 2000 # 截图（自动化/排�
 
 ```json
 {
-  "app": {"version": "0.5.1", "frozen": true, "mode": "install"},
+  "app": {"version": "0.6.2", "frozen": true, "mode": "install"},
   "ffmpeg": {"path": "...", "has_libmp3lame": true},
   "sep": {"default_model": "4s",
           "models": {"4s": {"present": true, "size_mb": 329.1},
@@ -674,7 +674,7 @@ src/ab/
   tools/   i18n generation, font subsetting, size report
 native/     C/C++ sources and build scripts (ab_audio.dll / ab_stretch.dll)
 packaging/  PyInstaller spec, Inno Setup script, third-party notices
-tests/      pytest (81 cases)
+tests/      pytest (83 cases)
 docs/       screenshots and model notes
 ```
 
@@ -713,7 +713,7 @@ src/ab/
   tools/   i18n 生成、字体子集化、体积报告
 native/     C/C++ 源码与构建脚本（ab_audio.dll / ab_stretch.dll）
 packaging/  PyInstaller spec、Inno Setup 脚本、第三方声明
-tests/      pytest（81 例）
+tests/      pytest（83 例）
 docs/       截图与模型说明
 ```
 

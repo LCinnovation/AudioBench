@@ -24,6 +24,44 @@ def _make_ncm(tmp: Path, meta: dict | None = None) -> Path:
     return path
 
 
+@pytest.mark.skipif(ffmpeg.ffmpeg_path() is None, reason="ffmpeg not available")
+def test_hires_96k_ncm_converts_without_false_truncation(tmp_path):
+    """96 kHz / 24 bit 的高解析音源转 mp3 会降采样，不能因此误判「载荷截断」。
+
+    真实案例：宇多田ヒカル《One Last Kiss》（96k/24bit，88 MB ncm）在 0.6.1 报
+    payload_truncated —— 因为校验用「样本数」比较，而输出 mp3 是 48 kHz。
+    """
+    payload = fx.make_flac(1.0, sr=96000, subtype="PCM_24")
+    info = decoder.flac_streaminfo(payload)
+    assert info and info["sample_rate"] == 96000 and info["bits"] == 24
+
+    blob = fx.encode_ncm(payload, metadata=fx.META)
+    src = tmp_path / "hires.ncm"
+    src.write_bytes(blob)
+    job = ncm_convert.NcmJob(src=src, out_dir=tmp_path / "out", fmt="mp3_320")
+    ncm_convert.convert_many([job])
+    assert job.status == "done", job.message
+    assert job.out_path and job.out_path.exists()
+    out = ffmpeg.probe(job.out_path)
+    assert abs(out.duration_s - 1.0) < 0.15, out.duration_s
+    assert out.sample_rate in (44100, 48000)
+
+
+@pytest.mark.skipif(ffmpeg.ffmpeg_path() is None, reason="ffmpeg not available")
+def test_真截断仍然会被发现(tmp_path):
+    """真截断（时长明显变短）必须仍然判失败——修 bug 不能把校验也删了。"""
+    payload = fx.make_flac(2.0, sr=44100)
+    blob = fx.encode_ncm(payload, metadata=fx.META)
+    src = tmp_path / "cut.ncm"
+    # 只保留一半载荷：STREAMINFO 仍写 2 秒
+    src.write_bytes(blob[: len(blob) * 3 // 5])
+    job = ncm_convert.NcmJob(src=src, out_dir=tmp_path / "out2", fmt="mp3_128")
+    ncm_convert.convert_many([job])
+    assert job.status == "failed", job.status
+    assert "truncat" in job.message.lower() or "payload" in job.message.lower()
+    assert not list((tmp_path / "out2").glob("*.mp3")) if (tmp_path / "out2").exists() else True
+
+
 def test_decode_matches_fixture(tmp_path):
     ncm = _make_ncm(tmp_path)
     data = decoder.read_file(ncm)

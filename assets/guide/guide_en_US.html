@@ -1,0 +1,131 @@
+<h1>AudioBench — Beginner's Guide</h1>
+
+<p class="note">Follow along; it takes about 10 minutes. Every step tells you <b>where to click</b>,
+<b>what you will see</b> and <b>what to do if it does not work</b>.</p>
+
+<h2>0. Know the window</h2>
+<img src="img/guide-main.png" width="760">
+<table>
+<tr><th>Area</th><th>What it looks like</th><th>What it is for</th></tr>
+<tr><td>Top bar</td><td>▶ ■ buttons, time display, metronome</td><td>Play, stop, loop, click track</td></tr>
+<tr><td>Second row</td><td>Speed / Pitch / Gain / Fade</td><td>Settings for the selected clip</td></tr>
+<tr><td>Middle dark area</td><td>Coloured horizontal bars</td><td>The timeline — your music lives here</td></tr>
+<tr><td>Left column</td><td>Song name + M / S + knob</td><td>Name, mute, solo, volume of each track</td></tr>
+<tr><td>Bottom</td><td>A row of small faders</td><td>The mixer; hide it from the View menu</td></tr>
+</table>
+
+<h2>1. Import a song</h2>
+<h3>How</h3>
+<ol>
+<li>Find your song in Explorer (<code>.mp3</code>, <code>.wav</code>, <code>.flac</code> are fine).</li>
+<li>Drag it onto the dark area and let go.</li>
+<li>Or press <code>Ctrl+I</code> and pick the file.</li>
+</ol>
+<h3>What you will see</h3>
+<p>A coloured bar (a <i>clip</i>) appears, and a new column with the song name (a <i>track</i>).
+The wavy line inside is the waveform.</p>
+<h3>If it does not work</h3>
+<ul>
+<li>Make sure the file ends with one of the supported extensions; convert <code>.ape</code> or
+<code>.dsf</code> to mp3 first.</li>
+<li>"Cannot decode" usually means the file itself is broken — try playing it elsewhere.</li>
+</ul>
+
+<h2>2. Play and loop</h2>
+<ol>
+<li><b>Space</b> starts and stops playback; <b>Home</b> jumps back to the start.</li>
+<li>To practise one part: hold <b>Shift</b> and drag a short range on the ruler. It turns blue
+and that range repeats.</li>
+<li>Double-click the ruler to clear the loop.</li>
+<li>The slanted-line button toggles the metronome.</li>
+</ol>
+<p class="warn">No sound? Check the M (mute) button on the track first, then the device shown in
+the bottom-right corner.</p>
+
+<h2>3. Edit a clip</h2>
+<ol>
+<li><b>Click</b> a bar to select it — the row of controls above becomes active.</li>
+<li>Drag the middle to move it; drag the left or right edge to trim it.</li>
+<li>Drag the two small corners on the top edge to fade in and out.</li>
+<li><b>S</b> splits at the playhead, <b>Delete</b> removes, <b>Ctrl+D</b> duplicates.</li>
+<li><b>Ctrl+Z</b> undoes, <b>Ctrl+Shift+Z</b> redoes (up to 200 steps).</li>
+</ol>
+
+<h2>4. Slow down or change key</h2>
+<ol>
+<li>Select a clip.</li>
+<li><b>Speed</b> 50–200: below 100 is slower, above is faster — <b>pitch does not change</b>.</li>
+<li><b>Pitch</b> −12…+12 semitones — <b>speed does not change</b>.</li>
+<li>The <b>1×</b> button resets the speed to 100%.</li>
+</ol>
+
+<h2>5. Separate vocals from the backing</h2>
+<img src="img/guide-sep.png" width="560">
+<ol>
+<li>Click the track you want to separate.</li>
+<li>Click the <b>person icon</b> at the far right of the top bar.</li>
+<li>Choose a model: <b>4 stems · high quality</b> (recommended) or <b>6 stems</b> if you also
+need guitar and piano.</li>
+<li>Pick the stems, then press <b>Start</b>.</li>
+<li>When it finishes, press <b>Create tracks</b>. The source track is muted automatically.</li>
+</ol>
+<p class="note">A 3-minute song takes roughly 1 minute; you can cancel at any time and nothing is
+left behind.</p>
+
+<h2>6. Export an mp3</h2>
+<img src="img/guide-export.png" width="560">
+<ol>
+<li>Press <code>Ctrl+E</code>.</li>
+<li>Pick a format: <b>MP3 320</b> (usual), <b>WAV</b> (lossless, large), <b>FLAC</b> (lossless, medium).</li>
+<li>Pick the scope: whole mix or the selected track.</li>
+<li>Choose a folder and press <b>Start</b>. The folder opens with the file selected.</li>
+</ol>
+<p class="warn">Seeing "clipping detected"? Pull the master fader down a little and export again.</p>
+
+<h2>7. Save and recover</h2>
+<p><code>Ctrl+S</code> saves the project (<code>.abproj</code>). A draft is autosaved every
+30 seconds; if AudioBench closes unexpectedly it offers to restore it next time.</p>
+
+<h2>8. FAQ</h2>
+<table>
+<tr><th>Symptom</th><th>Fix</th></tr>
+<tr><td>No sound while playing</td><td>Track M is on, system volume, or wrong device</td></tr>
+<tr><td>Import takes a while</td><td>Waveform generation; wait for the status bar</td></tr>
+<tr><td>Separation seems slow</td><td>Normal; it runs on your CPU</td></tr>
+<tr><td>Exported file is silent</td><td>Track muted, or the clip starts after 0 s</td></tr>
+<tr><td>Interface is Chinese</td><td>Help → Settings → language</td></tr>
+<tr><td>Show this guide again</td><td>Press <code>F1</code></td></tr>
+</table>
+
+<h2>9. Jargon cheat sheet</h2>
+<table>
+<tr><th>Term</th><th>Plain meaning</th></tr>
+<tr><td>Track</td><td>One lane of the timeline</td></tr>
+<tr><td>Clip</td><td>One piece of audio inside a lane</td></tr>
+<tr><td>Playhead</td><td>The red vertical line showing the current position</td></tr>
+<tr><td>Fader</td><td>A volume slider</td></tr>
+<tr><td>Mute / Solo</td><td>M silences this track; S silences every other track</td></tr>
+<tr><td>Gain</td><td>Volume, measured in dB</td></tr>
+<tr><td>Fade in / out</td><td>Gradually louder at the start / softer at the end</td></tr>
+<tr><td>Pitch</td><td>Key change, measured in semitones</td></tr>
+<tr><td>Stems</td><td>The separated parts of a song</td></tr>
+<tr><td>Clipping</td><td>Too loud — the waveform is cut flat and sounds distorted</td></tr>
+</table>
+
+<h2>10. Shortcuts</h2>
+<table>
+<tr><td>Space</td><td>Play / pause</td></tr>
+<tr><td>Home</td><td>Back to start</td></tr>
+<tr><td>Ctrl+I</td><td>Import audio</td></tr>
+<tr><td>Ctrl+S / Ctrl+Shift+S</td><td>Save / save as</td></tr>
+<tr><td>Ctrl+Z / Ctrl+Shift+Z</td><td>Undo / redo</td></tr>
+<tr><td>Ctrl+E</td><td>Export</td></tr>
+<tr><td>Delete</td><td>Delete clip</td></tr>
+<tr><td>S</td><td>Split at playhead</td></tr>
+<tr><td>Ctrl+D</td><td>Duplicate clip</td></tr>
+<tr><td>Ctrl + wheel</td><td>Zoom the timeline</td></tr>
+<tr><td>Ctrl+M</td><td>Show / hide the mixer</td></tr>
+<tr><td>Shift + drag on ruler</td><td>Set an A-B loop</td></tr>
+<tr><td>M</td><td>Add a marker at the playhead</td></tr>
+<tr><td>F1</td><td>Open this help</td></tr>
+</table>

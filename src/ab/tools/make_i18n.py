@@ -108,7 +108,65 @@ ZH: dict[tuple[str, str], str] = {
     ("Sep", "Created {n} stem tracks"): "已创建 {n} 条分离轨道",
     ("Sep", "Separation runtime missing — reinstall AudioBench"): "分离运行时缺失——请重新安装 AudioBench",
     # ---------------------------------------------------------------- Guide / 帮助
-    ("Guide", "Help"): "帮助",
+    # ---------------------------------------------------------------- 分轨名（给小白看中文）
+    ("Stem", "Vocals"): "人声",
+    ("Stem", "Drums"): "鼓",
+    ("Stem", "Bass"): "贝斯",
+    ("Stem", "Guitar"): "吉他",
+    ("Stem", "Piano"): "钢琴",
+    ("Stem", "Other (incl. strings)"): "其他（含弦乐）",
+    # ---------------------------------------------------------------- 新手引导（浮层）
+    ("Guide", "Beginner's guide"): "新手教程",
+    ("Guide", "Close"): "关闭",
+    ("Guide", "Step 1 · Bring a song in"): "第 1 步：把歌拖进来",
+    ("Guide", "Step 2 · Press Space to listen"): "第 2 步：按空格试听",
+    ("Guide", "Step 3 · Meet the track panel"): "第 3 步：认识左边这一栏",
+    ("Guide", "Step 4 · Select a bar to edit it"): "第 4 步：选中就能改",
+    ("Guide", "Step 5 · Split vocals from backing"): "第 5 步：分开人声和伴奏",
+    ("Guide", "Step 6 · Export an mp3"): "第 6 步：导出成 mp3",
+    ("Guide", "Hold your song with the mouse (mp3, wav or flac), drag it onto the "
+              "dark area below and let go. You can also press Ctrl+I and pick a file.\n"
+              "A long bar appears — that bar is your song."):
+        "用鼠标按住你的歌（mp3、wav、flac 都行），拖到下面这块深色区域，松手就行；"
+        "也可以按 Ctrl+I 选文件。\n拖进来后，会多出一条横条——那就是这首歌。",
+    ("Guide", "Nothing happens? Check the file ends with mp3/wav/flac/ogg/m4a/aac/wma."):
+        "没反应？确认文件后缀是 mp3/wav/flac/ogg/m4a/aac/wma 之一。",
+    ("Guide", "Space starts and stops playback; Home jumps back to the beginning.\n"
+              "To practise one part over and over, hold Shift and drag a short "
+              "range on the ruler — that range will loop."):
+        "按空格键开始播放，再按一下停止；按 Home 回到开头。\n"
+        "想反复练同一段：按住 Shift 在顶部刻度尺上拖一小段，就会循环这一段。",
+    ("Guide", "No sound? Look at the M (mute) button on the track first."):
+        "没声音？先看轨道上的 M（静音）有没有被点亮。",
+    ("Guide", "Left of every bar is a small panel: the song name on top "
+              "(double-click to rename), M mutes, S solos (only that track plays), "
+              "the round knob is volume, EQ shapes high and low frequencies.\n"
+              "Not sure what a button does? Hover over it for a tooltip."):
+        "每条横条左边是一个小面板：最上面是歌名（双击可以改名），M 是静音、"
+        "S 是独奏（只听这一条），圆钮是音量，EQ 是高低音。\n"
+        "拿不准就先把鼠标停上去，会显示提示。",
+    ("Guide", "Click a bar once to select it. A row of controls appears above: "
+              "speed (slower/faster, pitch stays), pitch (key change, speed stays), "
+              "volume, fade in and fade out.\n"
+              "Drag the left or right edge of the bar to trim it. Wrong move? Ctrl+Z."):
+        "在横条上单击一下，它会被选中，上方出现一排控件：速度（放慢/加快，音高不变）、"
+        "变调、音量、渐入/渐出。\n拖横条的左右边缘可以剪短；拖错了按 Ctrl+Z 撤销。",
+    ("Guide", "Click the person icon at the far right of the transport bar, keep "
+              "\"4 stems · high quality\", then press Start.\n"
+              "When the progress bar finishes, press Create tracks: vocals, drums, "
+              "bass and other appear, and the original track is muted for you."):
+        "点走带条最右边的人形按钮，保持「四轨 · 高音质」，点「开始分离」。\n"
+        "等进度条走完，再点「创建轨道」，就会多出人声、鼓、贝斯、其他四条轨道，"
+        "原来那条会自动静音。",
+    ("Guide", "A 3-minute song takes about 1 minute. You can cancel any time."):
+        "3 分钟的歌大约要 1 分钟；中途不想等可以点「取消」。",
+    ("Guide", "Press Ctrl+E: choose a format (mp3 320 is the usual choice), pick a "
+              "folder and press Start.\n"
+              "The folder opens with your new file selected when it is done."):
+        "按 Ctrl+E 打开导出窗口：选格式（mp3 320 最常用）、选文件夹，点「开始导出」。\n"
+        "完成后会自动打开文件夹并选中文件。",
+    ("Guide", "Press F1 any time to reopen this tutorial and the shortcut list."):
+        "随时按 F1 可以重新打开这份教程和快捷键表。",    ("Guide", "Help"): "帮助",
     ("Guide", "AudioBench in four steps"): "四步上手 AudioBench",
     ("Guide", "Import audio"): "导入音频",
     ("Guide", "Loop and slow down"): "循环与放慢",

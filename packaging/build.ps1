@@ -43,7 +43,7 @@ Write-Output '[5/5] portable zip'
 $flag = Join-Path $app 'portable.flag'
 New-Item -ItemType File -Force $flag | Out-Null
 Copy-Item (Join-Path $root 'packaging\portable-README.txt') (Join-Path $app 'README-portable.txt') -Force -ErrorAction SilentlyContinue
-$zip = Join-Path $dist 'AudioBench-0.5.1-portable-win64.zip'
+$zip = Join-Path $dist 'AudioBench-0.6.2-portable-win64.zip'
 Remove-Item $zip -Force -ErrorAction SilentlyContinue
 Compress-Archive -Path (Join-Path $app '*') -DestinationPath $zip -CompressionLevel Optimal
 Remove-Item $flag -Force

@@ -29,6 +29,22 @@ DISPLAY = {
 }
 
 
+def stem_label(stem: str) -> str:
+    """分轨的中文名（小白用户看不懂 Drums/Bass 这类英文）。
+
+    注意每个 tr() 的第一个参数必须是字面量，翻译提取脚本才收得到。
+    """
+    labels = {
+        "vocals": tr("Stem", "Vocals"),
+        "drums": tr("Stem", "Drums"),
+        "bass": tr("Stem", "Bass"),
+        "guitar": tr("Stem", "Guitar"),
+        "piano": tr("Stem", "Piano"),
+        "other": tr("Stem", "Other (incl. strings)"),
+    }
+    return labels.get(stem, stem)
+
+
 class SeparationDialog(QDialog):
     stemsCreated = Signal(dict)          # {"dir":..., "stems":[{name,path}], "source": path}
 
@@ -50,7 +66,7 @@ class SeparationDialog(QDialog):
         for mid, spec in sep_models.MODELS.items():
             info = sep_models.describe(mid)
             zh = spec.get("label_zh") or spec["label"]
-            text = f"{zh} · {info['size_mb']:.0f} MB" if info["present"] else f"{zh} · ✗"
+            text = f"{zh} · {info['size_mb']:.0f} MB" if info["present"] else f"{zh} · ×"
             self.model_combo.addItem(text, mid)
             if not info["present"]:
                 idx = self.model_combo.count() - 1
@@ -141,7 +157,7 @@ class SeparationDialog(QDialog):
                                               str(Path.home()),
                                               "Audio (*.wav *.mp3 *.flac *.m4a *.ogg)")
         if path:
-            self.source.addItem(f"📄 {Path(path).name}", (path, None))
+            self.source.addItem(f"{Path(path).name}", (path, None))
             self.source.setCurrentIndex(self.source.count() - 1)
             self._update_estimate()
 
@@ -195,7 +211,7 @@ class SeparationDialog(QDialog):
             box.deleteLater()
         self.stem_boxes.clear()
         for i, s in enumerate(sep_models.stems_for(self._current_model())):
-            label = DISPLAY.get(s, (s, s))[0]
+            label = stem_label(s)
             box = QCheckBox(label, self)
             box.setChecked(True)
             box.toggled.connect(self._update_estimate)

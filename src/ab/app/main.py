@@ -85,7 +85,18 @@ def _load_fonts() -> str:
     return family
 
 
+def _force_utf8_stdio() -> None:
+    """CLI 输出统一用 UTF-8：冻结版在中文 Windows 上默认 GBK，
+    打印含中文路径的 JSON 会变成乱码（--ncm-batch 踩过）。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")   # type: ignore[attr-defined]
+        except Exception:
+            pass
+
+
 def main(argv: list[str] | None = None) -> int:
+    _force_utf8_stdio()
     args = parse_args(list(sys.argv[1:] if argv is None else argv))
     _apply_env(args)
     _set_app_id()

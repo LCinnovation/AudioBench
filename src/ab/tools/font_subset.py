@@ -17,6 +17,32 @@ PUNCT = (
     "，。、；：？！“”‘’（）《》〈〉【】〔〕—…·～￥％＋－×÷＝"
     "　・…‥※→←↑↓■□●○◆◇★☆①②③④⑤⑥⑦⑧⑨⑩"
 )
+# 界面里实际用到的符号（曾经漏掉，导致中文界面出现方块）：⚠ ↔ ≈ ≥ − ∈ ├ ▶ ± 「」
+SYMBOLS = "⚠↔≈≥−∈├▶▲▼△▽◆±「」『』·•✓"
+
+ROOT = Path(__file__).resolve().parents[3]
+
+
+def used_chars() -> str:
+    """扫描随包发布的文本，收集真正用到的字符（源码字面量 + 中文翻译 + 教程 HTML）。"""
+    chars: list[str] = []
+    globs = [ROOT / "src", ROOT / "assets"]
+    exts = ("*.py", "*.ts", "*.html", "*.txt")
+    for base in globs:
+        for ext in exts:
+            for p in base.rglob(ext):
+                try:
+                    chars.append(p.read_text(encoding="utf-8", errors="ignore"))
+                except Exception:
+                    continue
+    text = "".join(chars)
+    keep = []
+    for ch in text:
+        o = ord(ch)
+        if o < 0x20 or o == 0x7F:
+            continue
+        keep.append(ch)
+    return "".join(keep)
 
 
 def gb2312_level1() -> str:
@@ -35,7 +61,7 @@ def subset(src: Path, dst: Path) -> None:
     from fontTools import subset as ft_subset
     from fontTools.ttLib import TTFont
 
-    text = ASCII + PUNCT + gb2312_level1()
+    text = ASCII + PUNCT + SYMBOLS + gb2312_level1() + used_chars()
     text = "".join(dict.fromkeys(text))          # 去重
     dst.parent.mkdir(parents=True, exist_ok=True)
 

@@ -30,7 +30,7 @@ class Step:
 class OnboardingOverlay(QWidget):
     finished = Signal(bool)     # True=走完, False=跳过
 
-    CARD_W = 420
+    CARD_W = 560
 
     def __init__(self, parent: QWidget, steps: list[Step], parent_window=None):
         super().__init__(parent)
