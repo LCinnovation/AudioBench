@@ -2,18 +2,18 @@
 
 [**English**](#introduction) · [中文](#项目介绍)
 
-**Download**: [Installer](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-setup-x64.exe) (260 MiB) ·
-[Portable](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-portable-win64.zip) (433 MiB) ·
-[Checksums](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/SHA256SUMS.txt) ·
+**Download**: [Installer](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.3/AudioBench-0.6.3-setup-x64.exe) (260 MiB) ·
+[Portable](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.3/AudioBench-0.6.3-portable-win64.zip) (433 MiB) ·
+[Checksums](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.3/SHA256SUMS.txt) ·
 [All releases](https://github.com/LCinnovation/AudioBench/releases) · [Changelog](CHANGELOG.md)
 
 > Both packages bundle FFmpeg and the 4-stem / 6-stem separation models, so the app works offline right after installation.
 >
 > The installers are **not code-signed**; SmartScreen will warn about an "unknown publisher" on first run. Please verify `SHA256SUMS.txt` first.
 
-**下载**：[安装版](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-setup-x64.exe)（260 MiB） ·
-[绿色版](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/AudioBench-0.6.2-portable-win64.zip)（433 MiB） ·
-[校验值](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.2/SHA256SUMS.txt) ·
+**下载**：[安装版](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.3/AudioBench-0.6.3-setup-x64.exe)（260 MiB） ·
+[绿色版](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.3/AudioBench-0.6.3-portable-win64.zip)（433 MiB） ·
+[校验值](https://github.com/LCinnovation/AudioBench/releases/download/v0.6.3/SHA256SUMS.txt) ·
 [全部版本](https://github.com/LCinnovation/AudioBench/releases) · [更新日志](CHANGELOG.md)
 
 > 两个包都已内置 FFmpeg 与 4 轨 / 6 轨分离模型，装完即可离线使用。
@@ -217,7 +217,7 @@ review (see [License](#license)).
 
 ### Option 1: Installer (recommended)
 
-1. Download `AudioBench-0.6.2-setup-x64.exe` from [Releases](https://github.com/LCinnovation/AudioBench/releases);
+1. Download `AudioBench-0.6.3-setup-x64.exe` from [Releases](https://github.com/LCinnovation/AudioBench/releases);
 2. Double-click to install — the default target is `%LOCALAPPDATA%\Programs\AudioBench`
    (**no administrator rights needed**; the wizard also offers a per-machine install);
 3. Launch **AudioBench** from the Start menu.
@@ -226,7 +226,7 @@ The uninstaller asks whether to keep projects and settings; a silent uninstall k
 
 ### Option 2: Portable
 
-1. Download `AudioBench-0.6.2-portable-win64.zip` from [Releases](https://github.com/LCinnovation/AudioBench/releases)
+1. Download `AudioBench-0.6.3-portable-win64.zip` from [Releases](https://github.com/LCinnovation/AudioBench/releases)
    and extract it to any writable folder (a USB stick works);
 2. Double-click `AudioBench.exe`.
 
@@ -255,7 +255,7 @@ To build installers, see [Building from Source](#building-from-source).
 
 ### 方式一：安装版（推荐）
 
-1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.6.2-setup-x64.exe`；
+1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.6.3-setup-x64.exe`；
 2. 双击安装，默认装到 `%LOCALAPPDATA%\Programs\AudioBench`（**不需要管理员**，
    安装向导里也可以选"为所有用户安装"）；
 3. 开始菜单启动 **AudioBench**。
@@ -264,7 +264,7 @@ To build installers, see [Building from Source](#building-from-source).
 
 ### 方式二：绿色版（便携）
 
-1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.6.2-portable-win64.zip`，解压到任意可写目录（U 盘也行）；
+1. 从 [Releases](https://github.com/LCinnovation/AudioBench/releases) 下载 `AudioBench-0.6.3-portable-win64.zip`，解压到任意可写目录（U 盘也行）；
 2. 双击 `AudioBench.exe`。
 
 目录里有 `portable.flag` 时进入**便携模式**：配置、日志、缓存全部写在同目录的 `userdata\`，
@@ -557,7 +557,7 @@ Sample `--selftest` output (excerpt):
 
 ```json
 {
-  "app": {"version": "0.6.2", "frozen": true, "mode": "install"},
+  "app": {"version": "0.6.3", "frozen": true, "mode": "install"},
   "ffmpeg": {"path": "...", "has_libmp3lame": true},
   "sep": {"default_model": "4s",
           "models": {"4s": {"present": true, "size_mb": 329.1},
@@ -587,7 +587,7 @@ AudioBench.exe --capture shot.png --capture-after 2000 # 截图（自动化/排�
 
 ```json
 {
-  "app": {"version": "0.6.2", "frozen": true, "mode": "install"},
+  "app": {"version": "0.6.3", "frozen": true, "mode": "install"},
   "ffmpeg": {"path": "...", "has_libmp3lame": true},
   "sep": {"default_model": "4s",
           "models": {"4s": {"present": true, "size_mb": 329.1},
@@ -674,7 +674,7 @@ src/ab/
   tools/   i18n generation, font subsetting, size report
 native/     C/C++ sources and build scripts (ab_audio.dll / ab_stretch.dll)
 packaging/  PyInstaller spec, Inno Setup script, third-party notices
-tests/      pytest (83 cases)
+tests/      pytest (87 cases)
 docs/       screenshots and model notes
 ```
 
@@ -713,7 +713,7 @@ src/ab/
   tools/   i18n 生成、字体子集化、体积报告
 native/     C/C++ 源码与构建脚本（ab_audio.dll / ab_stretch.dll）
 packaging/  PyInstaller spec、Inno Setup 脚本、第三方声明
-tests/      pytest（83 例）
+tests/      pytest（87 例）
 docs/       截图与模型说明
 ```
 

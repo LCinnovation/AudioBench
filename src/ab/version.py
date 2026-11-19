@@ -2,7 +2,7 @@
 
 APP_NAME = "AudioBench"
 APP_ID = "AudioBench"
-VERSION = "0.6.2"
+VERSION = "0.6.3"
 BUILD_DATE = "2026-10-20"
 
 # 工程文件扩展名（不含点）

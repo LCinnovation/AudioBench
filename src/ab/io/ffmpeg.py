@@ -174,44 +174,77 @@ def _progress_loop(cmd: list[str], tmp: Path, dst: Path, *,
     return dst
 
 
+def cover_suffix(data: bytes) -> str:
+    """按文件头判断封面格式，返回带点的后缀。
+
+    之前所有封面都写成 `.cover.tmp`（无扩展名），ffmpeg 只能靠内容猜格式；
+    某些 JPEG 会被 mpegts 探测器抢先命中，报 "could not find codec parameters"。
+    """
+    if data[:2] == b"\xff\xd8":
+        return ".jpg"
+    if data[:8].startswith(b"\x89PNG"):
+        return ".png"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return ".webp"
+    if data[:3] == b"GIF":
+        return ".gif"
+    return ".img"
+
+
 def transcode(src: str | Path, dst: str | Path, *, extra_args: list[str],
               meta: dict | None = None, cover: bytes | None = None,
               on_progress: ProgressFn | None = None,
               cancel: threading.Event | None = None,
               duration_s: float | None = None) -> Path:
-    """任意输入 → 目标格式（可带元数据与封面）。用于 ncm 转换与通用重编码。"""
+    """任意输入 → 目标格式（可带元数据与封面）。用于 ncm 转换与通用重编码。
+
+    封面只是附加信息：**封面读不了不能连累音频**，失败时自动去掉封面重试一次。
+    """
     exe = ffmpeg_path()
     if not exe:
         raise FfmpegError("ffmpeg_missing")
     dst = Path(dst)
     dst.parent.mkdir(parents=True, exist_ok=True)
     tmp = dst.with_name(f"{dst.stem}.part{dst.suffix}")
-    cmd = [str(exe), "-nostdin", "-v", "error", "-y", "-i", str(src)]
-    cover_path = None
-    if cover:
-        cover_path = dst.with_name(dst.stem + ".cover.tmp")
-        cover_path.write_bytes(cover)
-        cmd += ["-i", str(cover_path)]
-    cmd += ["-map", "0:a:0"]
-    if cover:
-        cmd += ["-map", "1:v:0", "-c:v", "copy", "-disposition:v:0", "attached_pic"]
-    cmd += ["-map_metadata", "-1"]
-    for k, v in (meta or {}).items():
-        if v not in (None, ""):
-            cmd += ["-metadata", f"{k}={v}"]
-    if dst.suffix.lower() == ".mp3":
-        cmd += ["-id3v2_version", "3"]
-    cmd += list(extra_args)
-    cmd += ["-progress", "pipe:1", "-nostats", str(tmp)]
+
+    def build(with_cover: bool) -> tuple[list[str], Path | None]:
+        cmd = [str(exe), "-nostdin", "-v", "error", "-y", "-i", str(src)]
+        cover_path = None
+        if with_cover and cover:
+            cover_path = dst.with_name(f"{dst.stem}.cover{cover_suffix(cover)}")
+            cover_path.write_bytes(cover)
+            cmd += ["-i", str(cover_path)]
+        cmd += ["-map", "0:a:0"]
+        if cover_path is not None:
+            cmd += ["-map", "1:v:0", "-c:v", "copy", "-disposition:v:0", "attached_pic"]
+        cmd += ["-map_metadata", "-1"]
+        for k, v in (meta or {}).items():
+            if v not in (None, ""):
+                cmd += ["-metadata", f"{k}={v}"]
+        if dst.suffix.lower() == ".mp3":
+            cmd += ["-id3v2_version", "3"]
+        cmd += list(extra_args)
+        cmd += ["-progress", "pipe:1", "-nostats", str(tmp)]
+        return cmd, cover_path
+
+    cmd, cover_path = build(True)
     try:
         return _progress_loop(cmd, tmp, dst, on_progress=on_progress, cancel=cancel,
                               duration_s=duration_s, code="transcode_failed")
+    except FfmpegError as e:
+        if cover_path is None:
+            raise
+        log.warning("transcode with cover failed (%s), retrying without cover", e)
+        cmd2, _ = build(False)
+        return _progress_loop(cmd2, tmp, dst, on_progress=on_progress, cancel=cancel,
+                              duration_s=duration_s, code="transcode_failed")
     finally:
-        if cover_path and cover_path.exists():
-            try:
-                cover_path.unlink()
-            except OSError:
-                pass
+        for p in (cover_path,):
+            if p and p.exists():
+                try:
+                    p.unlink()
+                except OSError:
+                    pass
 
 
 def encode_f32(src_f32: str | Path, dst: str | Path, *, sample_rate: int,
@@ -232,7 +265,7 @@ def encode_f32(src_f32: str | Path, dst: str | Path, *, sample_rate: int,
            "-f", "f32le", "-ar", str(int(sample_rate)), "-ac", "2", "-i", str(src_f32)]
     cover_path = None
     if cover:
-        cover_path = dst.with_name(dst.name + ".cover.tmp")
+        cover_path = dst.with_name(f"{dst.stem}.cover{cover_suffix(cover)}")
         cover_path.write_bytes(cover)
         cmd += ["-i", str(cover_path)]
     cmd += ["-map", "0:a:0"]
